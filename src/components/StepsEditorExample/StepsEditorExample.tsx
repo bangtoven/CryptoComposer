@@ -25,11 +25,6 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
 
   return (
     <StepIndexContext.Provider value={{ currentStepIndex }}>
-      <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Stop' : 'Play'}</button>
-
-      <br />
-      <br />
-
       <DAWStepsEditor
         subdivision={8}
         steps={currentSteps}
@@ -44,6 +39,12 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
           decompress(result);
         }}
       />
+
+      <br />
+      <br />
+      <button style={{ width: 120, justifyContent: 'center' }} onClick={() => setIsPlaying(!isPlaying)}>
+        {isPlaying ? 'Stop' : 'Play'}
+      </button>
 
       <Song isPlaying={isPlaying}>
         <Track

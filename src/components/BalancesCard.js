@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Text from './Text';
 import Card from './Card';
-import { colors } from '../theme';
 import { useWeb3React } from '@web3-react/core';
 import useEth from '../hooks/useEth';
 import { useAppContext } from '../AppContext';
@@ -18,7 +17,9 @@ const BalanceCard = () => {
 
   return (
     <Card style={{ maxWidth: 300 }}>
-      <Text block>ETH balance: {ethBalance}</Text>
+      <Text t3 block>
+        ETH balance: {ethBalance}
+      </Text>
     </Card>
   );
 };

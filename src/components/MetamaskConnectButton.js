@@ -7,6 +7,8 @@ import Text from './Text';
 import Card from './Card';
 import { injected } from '../connectors';
 import { shortenAddress } from '../utils/shortenAddress';
+import useEth from '../hooks/useEth';
+import { colors } from '../theme';
 
 const MetamaskLogo = styled.img.attrs({
   src: MMLogo,
@@ -17,25 +19,42 @@ const MetamaskLogo = styled.img.attrs({
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
 const MetamaskConnectButton = () => {
-  const { activate, active, account, deactivate } = useWeb3React();
+  const { activate, active, account, deactivate, chainId } = useWeb3React();
+  const { fetchEthBalance, ethBalance } = useEth();
+
+  React.useEffect(() => {
+    if (account) {
+      fetchEthBalance();
+    }
+  }, [account, chainId]);
 
   if (active) {
     return (
-      <Card className="d-flex flex-row justify-content-between" style={{ width: 350 }}>
-        <MetamaskLogo />
-        <Text uppercase t3 lineHeight="40px" className="mx-4">
-          {shortenAddress(account)}
+      <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: 'gray' }}>
+        {/* <MetamaskLogo /> */}
+        <Text t3 lineHeight="40px" className="mx-3">
+          {shortenAddress(account) + ' on Chain #' + chainId}
         </Text>
-        <ConnectBtn onClick={deactivate}>Log Out</ConnectBtn>
+        <Text t3 lineHeight="40px" className="mx-3">
+          ETH balance: {ethBalance}
+        </Text>
+        {/* <ConnectBtn
+          onClick={() => {
+            deactivate();
+            console.log('logged out');
+          }}
+        >
+          Log Out
+        </ConnectBtn> */}
       </Card>
     );
   }
 
   return (
     <Card className="d-flex flex-row justify-content-between" style={{ width: 350 }}>
-      <MetamaskLogo />
+      {/* <MetamaskLogo /> */}
       <Text uppercase t3 lineHeight="40px" className="mx-2">
-        Metamask
+        Connect Wallet
       </Text>
       <ConnectBtn onClick={() => activate(injected)}>Connect</ConnectBtn>
     </Card>
