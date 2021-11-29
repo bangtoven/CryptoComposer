@@ -11,6 +11,12 @@ module.exports = {
       config.node = { fs: 'empty' };
     }
 
+    config.performance = {
+      hints: false,
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
+    };
+
     return config;
   },
   plugins: ['scss'],

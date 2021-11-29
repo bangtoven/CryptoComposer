@@ -1,6 +1,6 @@
 import { StepNoteType } from 'reactronica';
 import { midiNotes } from './midiConfig';
-import LZUTF8 from 'LZUTF8';
+import LZUTF8 from 'lzutf8';
 import CryptoJS from 'crypto-js';
 
 export function compress(notes: StepNoteType[][]): [string, Uint8Array] {
