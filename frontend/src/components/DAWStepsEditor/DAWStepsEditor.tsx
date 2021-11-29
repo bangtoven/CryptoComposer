@@ -1,8 +1,8 @@
 import React from 'react';
-import { StepNoteType } from 'reactronica';
+import { MidiNote, StepNoteType } from 'reactronica';
 import produce from 'immer';
 
-import { midiNotes } from './midiConfig';
+import { midiNotes } from '../../models/midiConfig';
 import { StepIndexContext } from '../../contexts/StepIndexContext';
 
 import css from './DAWStepsEditor.module.scss';
@@ -15,8 +15,8 @@ type Props = {
   steps?: StepNoteType[][];
   // defaultSteps?: StepNoteType[][];
   subdivision?: number;
-  startNote?: string;
-  endNote?: string;
+  startNote?: MidiNote;
+  endNote?: MidiNote;
   disableScrollIntoView?: boolean;
   className?: string;
   onStepEditorChange?: (steps: StepNoteType[][]) => void;
