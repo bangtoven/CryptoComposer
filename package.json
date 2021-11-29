@@ -1,10 +1,13 @@
 {
   "name": "blockchain-developer-bootcamp-final-project",
+  "homepage": "http://bangtoven.github.io/blockchain-developer-bootcamp-final-project",
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
     "start": "razzle start",
-    "build": "razzle build --noninteractive "
+    "build": "razzle build --noninteractive ",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build/public"
   },
   "dependencies": {
     "@types/crypto-js": "^4.0.2",
@@ -33,6 +36,7 @@
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^4.5.2",
     "mini-css-extract-plugin": "^2.4.5",
     "prettier": "2.2.1",
