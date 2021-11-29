@@ -3,7 +3,10 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { ethers } from 'ethers';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route } from 'react-router-dom';
-import './styles/App.css';
+import './styles/base.scss';
+
+import 'tailwindcss/tailwind.css';
+
 import Home from './pages/Home';
 import Header from './components/Header';
 import { AppContextProvider } from './AppContext';

@@ -3,13 +3,16 @@ import { Container } from 'react-bootstrap';
 import CompInteractionCard from './CompInteractionCard';
 import ConnectWalletModal from '../../components/ConnectWalletModal';
 import useWalletConnectionModal from '../../hooks/useWalletConnectionModal';
+import { Song, Track, Instrument } from 'reactronica';
+import StepsEditorExample from '../../components/StepsEditorExample';
 
 const Home = () => {
   const { isWalletConnectModalOpen } = useWalletConnectionModal();
   return (
     <Container className="mt-5">
       {isWalletConnectModalOpen && <ConnectWalletModal />}
-      <CompInteractionCard />
+      <StepsEditorExample />
+      {/* <CompInteractionCard /> */}
     </Container>
   );
 };

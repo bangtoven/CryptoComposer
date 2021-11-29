@@ -13,4 +13,5 @@ module.exports = {
 
     return config;
   },
+  plugins: ['scss'],
 };

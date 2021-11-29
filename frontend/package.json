@@ -11,13 +11,12 @@
     "@web3-react/injected-connector": "^6.0.7",
     "bootstrap": "^4.6.0",
     "ethers": "^5.1.0",
-    "razzle": "^4.2.7",
-    "razzle-dev-utils": "^4.2.7",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-icons": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.1.2",
+    "reactronica": "^0.7.0",
     "styled-components": "^5.2.3"
   },
   "devDependencies": {
@@ -32,8 +31,12 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^4.5.2",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^2.4.5",
     "prettier": "2.2.1",
+    "razzle": "^4.2.7",
+    "razzle-dev-utils": "^4.2.7",
+    "razzle-plugin-scss": "^4.2.7",
+    "tailwindcss": "^2.2.19",
     "webpack": "^4.44.1",
     "webpack-dev-server": "^3.11.2"
   }
