@@ -7099,6 +7099,13 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lzutf8@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/lzutf8/-/lzutf8-0.6.0.tgz#ddfced3aa9959be68cc46d12c609e64d41e710f8"
+  integrity sha512-Ji0WsBU3OIA/c/RHd/vvHbda+WnbnXREpE1xHgdoyy601dQn3ZFlkDtGKDh/AtFpbO1+3YFL01KqJrD7NYuWHg==
+  dependencies:
+    readable-stream "^3.6.0"
+
 make-dir@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"

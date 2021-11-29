@@ -3,6 +3,7 @@ import { Song, Track, Instrument } from 'reactronica';
 
 import DAWStepsEditor from '../DAWStepsEditor';
 import { StepIndexContext } from '../../contexts/StepIndexContext';
+import LZUTF8 from 'LZUTF8';
 
 type Props = {
   className?: string;
@@ -37,6 +38,11 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
         disableScrollIntoView={true}
         onStepEditorChange={(steps) => {
           setCurrentSteps(steps);
+          var output = LZUTF8.compress(JSON.stringify(steps));
+          console.log(output);
+
+          var decompressed = LZUTF8.decompress(output);
+          console.log(decompressed);
         }}
       />
 
