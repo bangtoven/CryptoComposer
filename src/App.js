@@ -3,8 +3,7 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { ethers } from 'ethers';
 import { Route } from 'react-router-dom';
 import './styles/base.scss';
-
-import 'tailwindcss/tailwind.css';
+import css from './styles/app.scss';
 
 import Home from './pages/Home';
 import Header from './components/Header';
@@ -18,9 +17,11 @@ const App = () => {
   return (
     <AppContextProvider>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <div>
-          <Header />
-          <Route exact path="/" component={Home} />
+        <Header />
+        <div className="app">
+          <main className={css.main}>
+            <Route exact path="/" component={Home} />
+          </main>
         </div>
       </Web3ReactProvider>
     </AppContextProvider>

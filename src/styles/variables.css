@@ -53,7 +53,7 @@
   --border-radius: 4px;
 
   /* Containers */
-  --container-md: 45rem;
+  --container-md: 75rem;
 }
 
 :export {

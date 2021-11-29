@@ -43,7 +43,6 @@
     "razzle": "^4.2.7",
     "razzle-dev-utils": "^4.2.7",
     "razzle-plugin-scss": "^4.2.7",
-    "tailwindcss": "^2.2.19",
     "webpack": "^5",
     "webpack-dev-server": "^3.11.2"
   }
