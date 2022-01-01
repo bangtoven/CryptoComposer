@@ -1,27 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721BurnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract CryptoComposer is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeable, ERC721BurnableUpgradeable, OwnableUpgradeable {
-    using CountersUpgradeable for CountersUpgradeable.Counter;
+contract CryptoComposer is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
+    using Counters for Counters.Counter;
 
-    CountersUpgradeable.Counter private _tokenIdCounter;
+    Counters.Counter private _tokenIdCounter;
 
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() initializer {}
-
-    function initialize() initializer public {
-        __ERC721_init("CryptoComposer", "CC");
-        __ERC721Enumerable_init();
-        __ERC721Burnable_init();
-        __Ownable_init();
-    }
+    constructor() ERC721("CryptoComposer", "CC") {}
 
     function _baseURI() internal pure override returns (string memory) {
         return "http://crypto-composer.bangtoven.com/";
@@ -37,7 +28,7 @@ contract CryptoComposer is Initializable, ERC721Upgradeable, ERC721EnumerableUpg
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
         internal
-        override(ERC721Upgradeable, ERC721EnumerableUpgradeable)
+        override(ERC721, ERC721Enumerable)
     {
         super._beforeTokenTransfer(from, to, tokenId);
     }
@@ -45,7 +36,7 @@ contract CryptoComposer is Initializable, ERC721Upgradeable, ERC721EnumerableUpg
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721Upgradeable, ERC721EnumerableUpgradeable)
+        override(ERC721, ERC721Enumerable)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
