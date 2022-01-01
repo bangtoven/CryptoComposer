@@ -11,10 +11,10 @@ export function compress(notes: StepNoteType[][]): [string, Uint8Array] {
 
   const numbers = notes.map((step) => {
     if (!step) return [];
-    return step.map((note) => midiNotes.indexOf(note.name));
+    return step.map((note) => midiNotes.indexOf(note.name) - 60);
   });
 
-  const result = LZUTF8.compress(JSON.stringify(numbers));
+  const result = LZUTF8.compress(numbers.join('|'));
 
   return [hash, result];
 }
@@ -23,7 +23,10 @@ export function decompress(data: Uint8Array): StepNoteType[][] {
   if (!data.length) return [];
 
   const decompressed = LZUTF8.decompress(data);
-  const numbers = JSON.parse(decompressed);
+  const numbers = decompressed.split('|').map((step) => {
+    return step.split(',').map((note) => parseInt(note) + 60);
+  });
+
   const result = numbers.map((step) =>
     step.map((note) => {
       name: midiNotes[note];

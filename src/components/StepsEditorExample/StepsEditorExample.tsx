@@ -35,7 +35,7 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
           setCurrentSteps(steps);
           const [hash, result] = compress(steps);
           console.log('hash:', hash);
-          console.log(result);
+          console.log('result', result);
           decompress(result);
         }}
       />
