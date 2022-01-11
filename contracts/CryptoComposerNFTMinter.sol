@@ -16,21 +16,30 @@ contract CryptoComposerNFTMinter is ERC721, ERC721Enumerable, ERC721Burnable {
 		address composer;
 		string title;
 		bytes notes;
+		bytes32 hash;
 	}
 
 	mapping(uint256 => Song) public songs;
 
-	function _mintNewSong(string calldata title, bytes calldata notes)
+	// hash to songs
+	mapping(bytes32 => uint256) public hashes;
+
+	function _mintNewSong(string memory title, bytes memory notes)
 		internal
 		returns (uint256)
 	{
+		bytes32 hash = keccak256(notes);
+		Song memory song = songs[hashes[hash]];
+		require(song.composer == address(0), "Duplicate notes data");
+
 		uint256 tokenId = _tokenIdCounter.current();
 		_tokenIdCounter.increment();
 		_safeMint(msg.sender, tokenId);
 		songs[tokenId] = Song({
 			composer: msg.sender,
 			title: title,
-			notes: notes
+			notes: notes,
+			hash: hash
 		});
 		return tokenId;
 	}
