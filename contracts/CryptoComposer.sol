@@ -19,7 +19,7 @@ contract CryptoComposer is CryptoComposerTokenVendor, CryptoComposerNFTMinter {
 	}
 
 	function mintNewSong(string calldata title, bytes calldata notes)
-		public
+		external
 		hasEnoughComposerToken
 		returns (uint256)
 	{

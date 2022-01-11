@@ -14,11 +14,11 @@ contract CryptoComposerTokenVendor is Ownable {
 
 	uint256 public tokenPrice = 10**(18 - 3); // 0.001 ETH
 
-	function setTokenPrice(uint256 _newPrice) public onlyOwner {
+	function setTokenPrice(uint256 _newPrice) external onlyOwner {
 		tokenPrice = _newPrice;
 	}
 
-	function buyToken() public payable returns (uint256 tokenAmount) {
+	function buyToken() external payable returns (uint256 tokenAmount) {
 		uint256 amountToBuy = msg.value / tokenPrice;
 		require(amountToBuy > 0, "Send ETH to buy some tokens");
 
