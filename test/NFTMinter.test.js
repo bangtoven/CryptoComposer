@@ -24,7 +24,7 @@ contract('NFTMinter', function (accounts) {
     assert.equal(minted.notes, web3.utils.asciiToHex('notes_data'));
   });
 
-  it('should not allow to mint another song with same notes', async () => {
+  it('should not allow minting another song with same notes', async () => {
     await instance.mintNewSong('song_title', web3.utils.asciiToHex('notes_data'), { from: contractOwner });
 
     var totalSupply = await instance.totalSupply();
