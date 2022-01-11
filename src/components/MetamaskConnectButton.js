@@ -7,8 +7,6 @@ import Text from './Text';
 import Card from './Card';
 import { injected } from '../connectors';
 import { shortenAddress } from '../utils/shortenAddress';
-import useEth from '../hooks/useEth';
-import { colors } from '../theme';
 
 const MetamaskLogo = styled.img.attrs({
   src: MMLogo,
@@ -20,13 +18,6 @@ const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
 const MetamaskConnectButton = () => {
   const { activate, active, account, deactivate, chainId } = useWeb3React();
-  const { fetchEthBalance, ethBalance } = useEth();
-
-  React.useEffect(() => {
-    if (account) {
-      fetchEthBalance();
-    }
-  }, [account, chainId]);
 
   if (active) {
     return (
@@ -34,9 +25,6 @@ const MetamaskConnectButton = () => {
         {/* <MetamaskLogo /> */}
         <Text t3 lineHeight="40px" className="mx-3">
           {shortenAddress(account) + ' on Chain #' + chainId}
-        </Text>
-        <Text t3 lineHeight="40px" className="mx-3">
-          ETH balance: {ethBalance}
         </Text>
         {/* <ConnectBtn
           onClick={() => {

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Text from './Text';
 import Navbar from 'react-bootstrap/Navbar';
 import MetamaskConnectButton from './MetamaskConnectButton';
 import BalancesCard from './BalancesCard';
 import { useEagerConnect, useInactiveListener } from '../hooks/useEagerConnect';
+import { useContract } from '../hooks/useContract';
+import { CryptoComposerABI } from '../static/ABI';
+import { useAppContext } from '../AppContext';
 
 const Header = () => {
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
@@ -12,7 +16,7 @@ const Header = () => {
 
   return (
     <Navbar className="justify-content-between">
-      {/* <BalancesCard /> */}
+      <BalancesCard />
       <div />
       <MetamaskConnectButton />
     </Navbar>

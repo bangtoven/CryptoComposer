@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
 contract CryptoComposerTokenVendor is Ownable {
+	event BuyToken(address indexed to, uint256 amount);
+
 	CryptoComposerToken ccToken;
 
 	constructor(address cctAddress) {
@@ -31,6 +33,8 @@ contract CryptoComposerTokenVendor is Ownable {
 		// Transfer token to the msg.sender
 		bool sent = ccToken.transfer(msg.sender, amountToBuy);
 		require(sent, "Failed to transfer token to user");
+
+		emit BuyToken(msg.sender, amountToBuy);
 
 		return amountToBuy;
 	}
