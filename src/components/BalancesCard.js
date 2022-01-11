@@ -10,11 +10,17 @@ const { ethers } = require('ethers');
 
 const BalanceCard = () => {
   const { account, chainId } = useWeb3React();
+
   const contract = useContract('0x06395CAb4F62b17048dF22c6db8D77e65f4a06c7', CryptoComposerABI);
   const tokenContract = useContract('0x88e77ab1f42a75602F568a39857a5F4A6a36b5AC', CCTokenABI);
 
   const { exchangeRate, setExchangeRate } = useAppContext();
-  const { setCTokenBalance, cTokenBalance } = useAppContext();
+  const { cTokenBalance, setCTokenBalance } = useAppContext();
+
+  useEffect(async () => {
+    const price = (await contract.tokenPrice()).toNumber();
+    setExchangeRate(price);
+  }, [contract]);
 
   const fetchCCTokenBalance = async () => {
     const ccTokenBalance = await tokenContract.balanceOf(account);
@@ -22,16 +28,10 @@ const BalanceCard = () => {
   };
 
   useEffect(() => {
-    console.log('contract:', contract);
     if (account) {
       fetchCCTokenBalance();
     }
   }, [account, chainId]);
-
-  useEffect(async () => {
-    const price = (await contract.tokenPrice()).toNumber();
-    setExchangeRate(price);
-  }, [contract]);
 
   const buyCCT = async () => {
     console.log(contract);
@@ -53,7 +53,7 @@ const BalanceCard = () => {
         if (error.data && error.data.message) {
           alert(error.data.message);
         } else {
-          alert(error.message);
+          alert(error);
         }
         console.log('error: ', error);
       });
