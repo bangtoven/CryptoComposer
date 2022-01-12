@@ -22,12 +22,8 @@ const App = () => {
           <Header />
 
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/about">
-              <Text>ASDFSdfsadfs</Text>
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={Text} />
           </Switch>
         </BrowserRouter>
       </Web3ReactProvider>
