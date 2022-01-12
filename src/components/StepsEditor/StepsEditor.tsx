@@ -40,9 +40,7 @@ const StepsEditor: React.FunctionComponent<Props> = ({ className, stepsData, onS
         disableScrollIntoView={true}
         onStepEditorChange={(steps) => {
           setCurrentSteps(steps);
-          const [hash, data] = compress(steps);
-          console.log('hash:', hash);
-          console.log('data', data);
+          const [, data] = compress(steps);
           setCompressedStepsData(data);
           if (onStepEditorChange) {
             onStepEditorChange(data);

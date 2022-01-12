@@ -31,7 +31,9 @@ export function decompress(data: Uint8Array): StepNoteType[][] {
 
   const result = numbers.map((step) =>
     step.map((note) => {
-      name: midiNotes[note];
+      return {
+        name: midiNotes[note],
+      };
     }),
   );
   return result;

@@ -7,7 +7,13 @@ import { useCCTVendorContract, useCryptoComposerContract } from '../hooks/useCon
 import { decompress } from '../models/Compression';
 import { colors } from '../theme';
 
-const fromHexString = (hexString) => new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+const fromHexString = (hexString) =>
+  new Uint8Array(
+    hexString
+      .replace(/^0x/, '')
+      .match(/.{1,2}/g)
+      .map((byte) => parseInt(byte, 16)),
+  );
 
 export const Player = () => {
   const { id } = useParams();
@@ -24,10 +30,11 @@ export const Player = () => {
 
       const compressedStepsData = fromHexString(song.notes);
       const stepsData = decompress(compressedStepsData);
-      console.log('stepsData: ', stepsData);
       setStepsData(stepsData);
     }
-    fetchSong();
+    if (!song) {
+      fetchSong();
+    }
   }, [contract]);
 
   return (
