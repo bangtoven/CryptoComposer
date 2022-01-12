@@ -27,7 +27,7 @@ const Home = () => {
     if (!songIDs.length) {
       return <Text t1>Be the first crypto composer by minting your song!</Text>;
     } else {
-      return <SongList songIDs={songIDs} showComposer={false} />;
+      return <SongList songIDs={songIDs} showComposer={true} />;
     }
   } else {
     return <></>;

@@ -86,7 +86,9 @@ const BalanceCard = () => {
       </Text>
       <Text>CCT balance: {cTokenBalance}</Text>
       <Text>Song counts: {nftCount}</Text>
-      <button onClick={buyCCT}>Buy CCT (price: {exchangeRate / Math.pow(10, 18)} ETH)</button>
+      <button onClick={buyCCT}>
+        Buy CCT (price: {exchangeRate / Math.pow(10, 18)} {chainId != 137 ? 'ETH' : 'MATIC'})
+      </button>
     </Card>
   );
 };
