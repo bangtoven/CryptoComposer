@@ -8,23 +8,15 @@ import { compress } from '../../models/Compression';
 
 type Props = {
   className?: string;
+  stepsData: { name: MidiNote }[][];
   onStepEditorChange?: (data: Uint8Array) => void;
 };
 
-const StepsEditor: React.FunctionComponent<Props> = ({ className, onStepEditorChange }) => {
+const StepsEditor: React.FunctionComponent<Props> = ({ className, stepsData, onStepEditorChange }) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [stepsData, setStepsData] = React.useState(new Uint8Array());
+  const [compressedStepsData, setCompressedStepsData] = React.useState(new Uint8Array());
 
-  const [currentSteps, setCurrentSteps] = React.useState<{ name: MidiNote }[][]>([
-    [{ name: 'C4' }, { name: 'E4' }],
-    [{ name: 'E4' }],
-    [{ name: 'F4' }],
-    [{ name: 'G4' }],
-    [{ name: 'D4' }, { name: 'G4' }],
-    [{ name: 'F4' }],
-    [{ name: 'E4' }],
-    [{ name: 'D4' }],
-  ]);
+  const [currentSteps, setCurrentSteps] = React.useState<{ name: MidiNote }[][]>(stepsData);
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
 
   return (
@@ -37,7 +29,7 @@ const StepsEditor: React.FunctionComponent<Props> = ({ className, onStepEditorCh
       </Button>
 
       <Text t6 color="gray">
-        Notes data: {stepsData}
+        Notes data: {compressedStepsData}
       </Text>
 
       <DAWStepsEditor
@@ -51,7 +43,7 @@ const StepsEditor: React.FunctionComponent<Props> = ({ className, onStepEditorCh
           const [hash, data] = compress(steps);
           console.log('hash:', hash);
           console.log('data', data);
-          setStepsData(data);
+          setCompressedStepsData(data);
           if (onStepEditorChange) {
             onStepEditorChange(data);
           }

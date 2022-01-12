@@ -7,6 +7,17 @@ import { TextInput } from '../components/TextInput';
 import { useCryptoComposerContract } from '../hooks/useContract';
 import { colors } from '../theme';
 
+const defaultStepsData = [
+  [{ name: 'C4' }, { name: 'E4' }],
+  [{ name: 'E4' }],
+  [{ name: 'F4' }],
+  [{ name: 'G4' }],
+  [{ name: 'D4' }, { name: 'G4' }],
+  [{ name: 'F4' }],
+  [{ name: 'E4' }],
+  [{ name: 'D4' }],
+];
+
 export const Mint = () => {
   const { account } = useWeb3React();
   const [title, setTitle] = useState('');
@@ -60,6 +71,7 @@ export const Mint = () => {
       </Button>
 
       <StepsEditor
+        stepsData={defaultStepsData}
         onStepEditorChange={(data) => {
           setStepsData(data);
         }}
