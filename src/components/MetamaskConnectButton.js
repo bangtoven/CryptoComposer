@@ -2,17 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import { useWeb3React } from '@web3-react/core';
-import MMLogo from '../static/metamask-logo.svg';
 import Text from './Text';
 import Card from './Card';
 import { injected } from '../connectors';
 import { shortenAddress } from '../utils/shortenAddress';
-
-const MetamaskLogo = styled.img.attrs({
-  src: MMLogo,
-})`
-  height: 40px;
-`;
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 

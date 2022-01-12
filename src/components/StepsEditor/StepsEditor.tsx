@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 
-const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
+const StepsEditor: React.FunctionComponent<Props> = ({ className }) => {
   const [currentSteps, setCurrentSteps] = React.useState<{ name: MidiNote }[][]>([
     [{ name: 'C4' }, { name: 'E4' }],
     [{ name: 'E4' }],
@@ -60,4 +60,4 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
   );
 };
 
-export default StepsEditorExample;
+export default StepsEditor;
