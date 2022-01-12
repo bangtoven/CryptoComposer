@@ -8,7 +8,9 @@ module.exports = {
 
     // Ignore fs dependencies so we can use winston
     if (opts.env.target === 'node' && !opts.env.dev) {
-      config.resolve.fallback.fs = false;
+      config.resolve.fallback = {
+        fs: false,
+      };
     }
 
     config.performance = {
