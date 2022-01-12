@@ -11,14 +11,14 @@ type Props = {
 
 const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
   const [currentSteps, setCurrentSteps] = React.useState<{ name: MidiNote }[][]>([
-    [{ name: 'C3' }, { name: 'E3' }, { name: 'A3' }],
-    null,
-    [{ name: 'C3' }, { name: 'E3' }, { name: 'G3' }, { name: 'B3' }],
-    null,
-    [{ name: 'C3' }, { name: 'F3' }, { name: 'A3' }],
-    null,
-    [{ name: 'D3' }, { name: 'G3' }, { name: 'B3' }],
-    null,
+    [{ name: 'C4' }, { name: 'E4' }],
+    [{ name: 'E4' }],
+    [{ name: 'F4' }],
+    [{ name: 'G4' }],
+    [{ name: 'D4' }, { name: 'G4' }],
+    [{ name: 'F4' }],
+    [{ name: 'E4' }],
+    [{ name: 'D4' }],
   ]);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
@@ -28,8 +28,8 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
       <DAWStepsEditor
         subdivision={8}
         steps={currentSteps}
-        startNote="C3"
-        endNote="C4"
+        startNote="C4"
+        endNote="C5"
         disableScrollIntoView={true}
         onStepEditorChange={(steps) => {
           setCurrentSteps(steps);
@@ -46,14 +46,14 @@ const StepsEditorExample: React.FunctionComponent<Props> = ({ className }) => {
         {isPlaying ? 'Stop' : 'Play'}
       </button>
 
-      <Song isPlaying={isPlaying}>
+      <Song isPlaying={isPlaying} bpm={100}>
         <Track
           steps={currentSteps}
           onStepPlay={(_, index) => {
             setCurrentStepIndex(index);
           }}
         >
-          <Instrument type="synth"></Instrument>
+          <Instrument type="synth" oscillator={{ type: 'triangle' }}></Instrument>
         </Track>
       </Song>
     </StepIndexContext.Provider>

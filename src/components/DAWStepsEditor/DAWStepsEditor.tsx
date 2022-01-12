@@ -306,7 +306,7 @@ const DAWStepsEditor: React.FC<Props> = ({
         {/* Keyboard + Steps */}
         {/* --------------------------------------------------------------- */}
 
-        {noteNames.map((noteName, rowIndex) => {
+        {noteNames.reverse().map((noteName, rowIndex) => {
           const isAccidental = noteName.includes('#');
 
           return (
