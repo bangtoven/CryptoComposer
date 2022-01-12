@@ -66,6 +66,37 @@ export const CryptoComposerABI = [
       {
         indexed: true,
         internalType: 'address',
+        name: 'by',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'title',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'id',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'bytes32',
+        name: 'hash',
+        type: 'bytes32',
+      },
+    ],
+    name: 'CCNFTMinted',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
         name: 'from',
         type: 'address',
       },
@@ -527,7 +558,7 @@ export const CCTokenABI = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'to',
+        name: 'by',
         type: 'address',
       },
       {
@@ -537,7 +568,7 @@ export const CCTokenABI = [
         type: 'uint256',
       },
     ],
-    name: 'BuyToken',
+    name: 'CCTBought',
     type: 'event',
   },
   {
