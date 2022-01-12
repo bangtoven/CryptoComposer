@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import MetamaskConnectButton from './MetamaskConnectButton';
 import BalancesCard from './BalancesCard';
 import { useEagerConnect, useInactiveListener } from '../hooks/useEagerConnect';
-import { useContract } from '../hooks/useContract';
 import { CryptoComposerABI } from '../static/ABI';
 import { useAppContext } from '../AppContext';
 import { Link, useRouteMatch } from 'react-router-dom';

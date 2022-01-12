@@ -5,8 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useWeb3React } from '@web3-react/core';
 import styled from 'styled-components';
 import { useAppContext } from '../AppContext';
-import { useContract } from '../hooks/useContract';
-import { CryptoComposerABI, CCTokenABI } from '../static/ABI';
+import { useCryptoComposerContract, useTokenContract } from '../hooks/useContract';
 import { injected } from '../connectors';
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
@@ -14,8 +13,8 @@ const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 const BalanceCard = () => {
   const { activate, active, account, chainId } = useWeb3React();
 
-  const contract = useContract('0x06395CAb4F62b17048dF22c6db8D77e65f4a06c7', CryptoComposerABI);
-  const tokenContract = useContract('0x88e77ab1f42a75602F568a39857a5F4A6a36b5AC', CCTokenABI);
+  const contract = useCryptoComposerContract();
+  const tokenContract = useTokenContract();
 
   const { exchangeRate, setExchangeRate } = useAppContext();
   const { cTokenBalance, setCTokenBalance } = useAppContext();
