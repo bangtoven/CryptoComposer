@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Text from './Text';
 import Card from './Card';
 import Button from 'react-bootstrap/Button';
@@ -18,6 +18,7 @@ const BalanceCard = () => {
 
   const { exchangeRate, setExchangeRate } = useAppContext();
   const { cTokenBalance, setCTokenBalance } = useAppContext();
+  const [nftCount, setNftCount] = useState(0);
 
   useEffect(async () => {
     const price = (await tokenContract.tokenPrice()).toNumber();
@@ -29,9 +30,15 @@ const BalanceCard = () => {
     setCTokenBalance(ccTokenBalance.toNumber());
   };
 
+  const fetchNFTCounts = async () => {
+    const count = await contract.balanceOf(account);
+    setNftCount(count.toNumber());
+  };
+
   useEffect(() => {
     if (account) {
       fetchCCTokenBalance();
+      fetchNFTCounts();
     }
   }, [account, chainId]);
 
@@ -78,6 +85,7 @@ const BalanceCard = () => {
         CryptoComposerToken
       </Text>
       <Text>CCT balance: {cTokenBalance}</Text>
+      <Text>Song counts: {nftCount}</Text>
       <button onClick={buyCCT}>Buy CCT (price: {exchangeRate / Math.pow(10, 18)} ETH)</button>
     </Card>
   );
