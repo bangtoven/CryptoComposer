@@ -13,11 +13,14 @@ export class TextInput extends React.Component {
       error: props.error || '',
       label: props.label || 'Label',
     };
+
+    this.onChange = props.onChange;
   }
 
   changeValue(event) {
     const value = event.target.value;
     this.setState({ value, error: '' });
+    this.onChange(event.target.value);
   }
 
   handleKeyPress(event) {

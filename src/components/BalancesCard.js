@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useWeb3React } from '@web3-react/core';
 import styled from 'styled-components';
 import { useAppContext } from '../AppContext';
-import { useCryptoComposerContract, useTokenContract } from '../hooks/useContract';
+import { useCryptoComposerContract, useCCTVendorContract } from '../hooks/useContract';
 import { injected } from '../connectors';
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
@@ -14,13 +14,13 @@ const BalanceCard = () => {
   const { activate, active, account, chainId } = useWeb3React();
 
   const contract = useCryptoComposerContract();
-  const tokenContract = useTokenContract();
+  const tokenContract = useCCTVendorContract();
 
   const { exchangeRate, setExchangeRate } = useAppContext();
   const { cTokenBalance, setCTokenBalance } = useAppContext();
 
   useEffect(async () => {
-    const price = (await contract.tokenPrice()).toNumber();
+    const price = (await tokenContract.tokenPrice()).toNumber();
     setExchangeRate(price);
   }, [contract]);
 
@@ -37,8 +37,8 @@ const BalanceCard = () => {
 
   const buyCCT = async () => {
     console.log(contract);
-    contract
-      .buyToken({ value: exchangeRate })
+    tokenContract
+      .buyTokenToMintNFT({ value: exchangeRate })
       .then(() => {
         // contract.once(
         //   {

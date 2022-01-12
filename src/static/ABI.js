@@ -66,44 +66,6 @@ export const CryptoComposerABI = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'BuyToken',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
-      },
-    ],
-    name: 'OwnershipTransferred',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
         name: 'from',
         type: 'address',
       },
@@ -173,20 +135,6 @@ export const CryptoComposerABI = [
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'buyToken',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenAmount',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'payable',
-    type: 'function',
-    payable: true,
   },
   {
     inputs: [
@@ -268,20 +216,6 @@ export const CryptoComposerABI = [
     constant: true,
   },
   {
-    inputs: [],
-    name: 'owner',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
     inputs: [
       {
         internalType: 'uint256',
@@ -300,13 +234,6 @@ export const CryptoComposerABI = [
     stateMutability: 'view',
     type: 'function',
     constant: true,
-  },
-  {
-    inputs: [],
-    name: 'renounceOwnership',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
   },
   {
     inputs: [
@@ -373,19 +300,6 @@ export const CryptoComposerABI = [
       },
     ],
     name: 'setApprovalForAll',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_newPrice',
-        type: 'uint256',
-      },
-    ],
-    name: 'setTokenPrice',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -519,20 +433,6 @@ export const CryptoComposerABI = [
     constant: true,
   },
   {
-    inputs: [],
-    name: 'tokenPrice',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
     inputs: [
       {
         internalType: 'uint256',
@@ -592,19 +492,6 @@ export const CryptoComposerABI = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
-      },
-    ],
-    name: 'transferOwnership',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
         internalType: 'string',
         name: 'title',
         type: 'string',
@@ -630,11 +517,6 @@ export const CryptoComposerABI = [
 
 export const CCTokenABI = [
   {
-    inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-  {
     anonymous: false,
     inputs: [
       {
@@ -657,6 +539,44 @@ export const CCTokenABI = [
       },
     ],
     name: 'Approval',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'BuyToken',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'previousOwner',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
+    ],
+    name: 'OwnershipTransferred',
     type: 'event',
   },
   {
@@ -888,6 +808,34 @@ export const CCTokenABI = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'cryptoComposerAddress',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: 'decimals',
+    outputs: [
+      {
+        internalType: 'uint8',
+        name: '',
+        type: 'uint8',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -999,6 +947,24 @@ export const CCTokenABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'mint',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'name',
     outputs: [
@@ -1011,6 +977,27 @@ export const CCTokenABI = [
     stateMutability: 'view',
     type: 'function',
     constant: true,
+  },
+  {
+    inputs: [],
+    name: 'owner',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: 'renounceOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
@@ -1076,6 +1063,20 @@ export const CCTokenABI = [
         internalType: 'string',
         name: '',
         type: 'string',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: 'tokenPrice',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',
@@ -1150,35 +1151,56 @@ export const CCTokenABI = [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'decimals',
-    outputs: [
+    inputs: [
       {
-        internalType: 'uint8',
-        name: '',
-        type: 'uint8',
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
       },
     ],
-    stateMutability: 'view',
+    name: 'transferOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
-    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_newPrice',
+        type: 'uint256',
+      },
+    ],
+    name: 'setTokenPrice',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
       {
         internalType: 'address',
-        name: 'to',
+        name: '_addr',
         type: 'address',
       },
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
     ],
-    name: 'mint',
+    name: 'setCryptoComposerAddress',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'buyTokenToMintNFT',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenAmount',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'payable',
+    type: 'function',
+    payable: true,
   },
 ];

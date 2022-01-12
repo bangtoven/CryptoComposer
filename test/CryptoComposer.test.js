@@ -1,5 +1,5 @@
 const { catchRevert } = require('./exceptionsHelpers.js');
-const Token = artifacts.require('./CryptoComposerToken.sol');
+const TokenVendor = artifacts.require('./CryptoComposerTokenVendor.sol');
 const CryptoComposer = artifacts.require('./CryptoComposer.sol');
 
 contract('CryptoComposer', function (accounts) {
@@ -7,10 +7,9 @@ contract('CryptoComposer', function (accounts) {
   const originalTokenPrice = 1000000000000000;
 
   beforeEach(async () => {
-    tokenInstance = await Token.new();
+    tokenInstance = await TokenVendor.new();
     composerInstance = await CryptoComposer.new(tokenInstance.address);
-    const minterRole = await tokenInstance.MINTER_ROLE();
-    await tokenInstance.grantRole(minterRole, composerInstance.address);
+    await tokenInstance.setCryptoComposerAddress(composerInstance.address);
   });
 
   it('should not allow minting without enough CCT', async () => {
@@ -19,9 +18,7 @@ contract('CryptoComposer', function (accounts) {
 
   it('should allow minting with enough CCT', async () => {
     const numberOfTokensToBuy = 5;
-    await composerInstance.buyToken({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
-
-    await tokenInstance.increaseAllowance(composerInstance.address, 1, { from: alice });
+    await tokenInstance.buyTokenToMintNFT({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
 
     var balance = await tokenInstance.balanceOf(alice);
     assert.equal(balance.toNumber(), numberOfTokensToBuy);

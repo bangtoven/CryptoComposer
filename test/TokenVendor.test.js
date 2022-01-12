@@ -1,5 +1,4 @@
 const { catchRevert } = require('./exceptionsHelpers.js');
-const Token = artifacts.require('./CryptoComposerToken.sol');
 const TokenVendor = artifacts.require('./CryptoComposerTokenVendor.sol');
 
 contract('TokenVendor', function (accounts) {
@@ -7,10 +6,8 @@ contract('TokenVendor', function (accounts) {
   const originalTokenPrice = 1000000000000000;
 
   beforeEach(async () => {
-    tokenInstance = await Token.new();
-    vendorInstance = await TokenVendor.new(tokenInstance.address);
-    const minterRole = await tokenInstance.MINTER_ROLE();
-    await tokenInstance.grantRole(minterRole, vendorInstance.address);
+    vendorInstance = await TokenVendor.new();
+    await vendorInstance.setCryptoComposerAddress(vendorInstance.address);
   });
 
   context('token price', async () => {
@@ -33,52 +30,52 @@ contract('TokenVendor', function (accounts) {
 
   context('buy token', async () => {
     it('should revert without enough fund', async () => {
-      var balance = await tokenInstance.balanceOf(alice);
+      var balance = await vendorInstance.balanceOf(alice);
       assert.equal(balance.toNumber(), 0);
 
-      await catchRevert(vendorInstance.buyToken({ from: alice, value: 0 }));
-      balance = await tokenInstance.balanceOf(alice);
+      await catchRevert(vendorInstance.buyTokenToMintNFT({ from: alice, value: 0 }));
+      balance = await vendorInstance.balanceOf(alice);
       assert.equal(balance.toNumber(), 0, 'CCT balance should be zero');
     });
 
     it('should transfer CCT to sender with enough fund', async () => {
-      var balance = await tokenInstance.balanceOf(alice);
+      var balance = await vendorInstance.balanceOf(alice);
       assert.equal(balance.toNumber(), 0);
 
       const numberOfTokensToBuy = 7;
-      await vendorInstance.buyToken({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
-      balance = await tokenInstance.balanceOf(alice);
+      await vendorInstance.buyTokenToMintNFT({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
+      balance = await vendorInstance.balanceOf(alice);
       assert.equal(balance.toNumber(), numberOfTokensToBuy);
 
-      const totalSupply = await tokenInstance.totalSupply();
-      assert.equal(totalSupply.toNumber(), 1000);
+      const totalSupply = await vendorInstance.totalSupply();
+      assert.equal(totalSupply.toNumber(), numberOfTokensToBuy);
     });
 
-    it('should mint additional CCT when vendor does not have enough', async () => {
-      var totalSupply = await tokenInstance.totalSupply();
-      assert.equal(totalSupply.toNumber(), 0);
+    // it('should mint additional CCT when vendor does not have enough', async () => {
+    //   var totalSupply = await vendorInstance.totalSupply();
+    //   assert.equal(totalSupply.toNumber(), 0);
 
-      const numberOfTokensToBuy = 200;
-      await vendorInstance.buyToken({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
+    //   const numberOfTokensToBuy = 200;
+    //   await vendorInstance.buyToken({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
 
-      totalSupply = await tokenInstance.totalSupply();
-      assert.equal(totalSupply.toNumber(), 1000, 'total should be increased by default amount');
+    //   totalSupply = await vendorInstance.totalSupply();
+    //   assert.equal(totalSupply.toNumber(), 1000, 'total should be increased by default amount');
 
-      var vendorBalance = await tokenInstance.balanceOf(vendorInstance.address);
-      assert.equal(vendorBalance.toNumber(), 1000 - numberOfTokensToBuy);
-    });
+    //   var vendorBalance = await vendorInstance.balanceOf(vendorInstance.address);
+    //   assert.equal(vendorBalance.toNumber(), 1000 - numberOfTokensToBuy);
+    // });
 
     it('should mint necessary amount', async () => {
-      var totalSupply = await tokenInstance.totalSupply();
+      var totalSupply = await vendorInstance.totalSupply();
       assert.equal(totalSupply.toNumber(), 0);
 
       const numberOfTokensToBuy = 3000;
-      await vendorInstance.buyToken({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
+      await vendorInstance.buyTokenToMintNFT({ from: alice, value: numberOfTokensToBuy * originalTokenPrice });
 
-      totalSupply = await tokenInstance.totalSupply();
+      totalSupply = await vendorInstance.totalSupply();
       assert.equal(totalSupply.toNumber(), 3000, 'total should be increased to cover new purchase');
 
-      var vendorBalance = await tokenInstance.balanceOf(vendorInstance.address);
+      var vendorBalance = await vendorInstance.balanceOf(vendorInstance.address);
       assert.equal(vendorBalance.toNumber(), 0);
     });
   });

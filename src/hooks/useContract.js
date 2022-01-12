@@ -5,11 +5,11 @@ import { useWeb3React } from '@web3-react/core';
 import { CryptoComposerABI, CCTokenABI } from '../static/ABI';
 
 export function useCryptoComposerContract() {
-  return useContract('0x06395CAb4F62b17048dF22c6db8D77e65f4a06c7', CryptoComposerABI);
+  return useContract('0xbc243782bB0b206dED562066EfF432512668E5a2', CryptoComposerABI);
 }
 
-export function useTokenContract() {
-  return useContract('0x88e77ab1f42a75602F568a39857a5F4A6a36b5AC', CCTokenABI);
+export function useCCTVendorContract() {
+  return useContract('0x3a708A6C5226d334788280510a9D20E5245A08bd', CCTokenABI);
 }
 
 function useContract(contractAddress, ABI) {

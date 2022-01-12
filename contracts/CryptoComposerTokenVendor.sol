@@ -5,14 +5,8 @@ import "./CryptoComposerToken.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
-contract CryptoComposerTokenVendor is Ownable {
+contract CryptoComposerTokenVendor is CryptoComposerToken, Ownable {
 	event BuyToken(address indexed to, uint256 amount);
-
-	CryptoComposerToken ccToken;
-
-	constructor(address cctAddress) {
-		ccToken = CryptoComposerToken(cctAddress);
-	}
 
 	uint256 public tokenPrice = 10**(18 - 3); // 0.001 ETH
 
@@ -20,19 +14,25 @@ contract CryptoComposerTokenVendor is Ownable {
 		tokenPrice = _newPrice;
 	}
 
-	function buyToken() external payable returns (uint256 tokenAmount) {
+	address public cryptoComposerAddress;
+
+	function setCryptoComposerAddress(address _addr) external onlyOwner {
+		cryptoComposerAddress = _addr;
+		_grantRole(MINTER_ROLE, _addr);
+	}
+
+	function buyTokenToMintNFT()
+		external
+		payable
+		returns (uint256 tokenAmount)
+	{
 		uint256 amountToBuy = msg.value / tokenPrice;
 		require(amountToBuy > 0, "Send ETH to buy some tokens");
 
-		// check if the Vendor Contract has enough amount of tokens for the transaction
-		uint256 vendorBalance = ccToken.balanceOf(address(this));
-		if (vendorBalance < amountToBuy) {
-			ccToken.mint(address(this), Math.max(1000, amountToBuy));
-		}
+		require(cryptoComposerAddress != address(0));
 
-		// Transfer token to the msg.sender
-		bool sent = ccToken.transfer(msg.sender, amountToBuy);
-		require(sent, "Failed to transfer token to user");
+		_mint(msg.sender, amountToBuy);
+		increaseAllowance(cryptoComposerAddress, amountToBuy);
 
 		emit BuyToken(msg.sender, amountToBuy);
 
