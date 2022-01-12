@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "razzle start",
+    "start:local": "razzle start",
     "build": "razzle build --noninteractive ",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build/public",
-    "start:prod": "NODE_ENV=production node build/server.js"
+    "start": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
     "@types/crypto-js": "^4.0.2",
