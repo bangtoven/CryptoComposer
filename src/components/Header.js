@@ -9,6 +9,8 @@ import { CryptoComposerABI } from '../static/ABI';
 import { useAppContext } from '../AppContext';
 import { Link, useRouteMatch } from 'react-router-dom';
 import Card from './Card';
+import { useWeb3React } from '@web3-react/core';
+import { colors } from '../theme';
 
 function MenuLink({ label, to, activeOnlyWhenExact }) {
   let match = useRouteMatch({
@@ -19,7 +21,13 @@ function MenuLink({ label, to, activeOnlyWhenExact }) {
   return (
     <div className={match ? 'active' : ''}>
       <Link to={to}>
-        <Card style={{ width: 200, color: match ? 'white' : '#0fa6d1', background: match ? '#0fa6d1' : 'white' }}>
+        <Card
+          style={{
+            width: 200,
+            color: match ? 'white' : colors.lightBlue,
+            background: match ? colors.darkBlue : 'white',
+          }}
+        >
           <Text t3 block>
             {match && '> '}
             {label}
@@ -36,10 +44,14 @@ const Header = () => {
 
   useInactiveListener(!triedEager);
 
+  const { active } = useWeb3React();
+
   return (
     <Navbar className="justify-content-between">
       <MenuLink activeOnlyWhenExact={true} to="/" label="Home" />
-      <MenuLink to="/about" label="About" />
+      {active && <MenuLink to="/mysongs" label="My Songs" />}
+      {active && <MenuLink to="/mint" label="Mint new" />}
+      {!active && <Text>Sign in to mint your own songs!</Text>}
 
       <div />
       <BalancesCard />

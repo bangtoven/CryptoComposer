@@ -23,7 +23,8 @@ const App = () => {
 
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/about" component={Text} />
+            <Route path="/mysongs" component={Text} />
+            <Route path="/mint" component={Text} />
           </Switch>
         </BrowserRouter>
       </Web3ReactProvider>

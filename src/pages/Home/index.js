@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import useWalletConnectionModal from '../../hooks/useWalletConnectionModal';
 import StepsEditor from '../../components/StepsEditor';
 
 const Home = () => {
