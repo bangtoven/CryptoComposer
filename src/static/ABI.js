@@ -159,26 +159,6 @@ export const CryptoComposerABI = [
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
-    name: 'hashes',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
         internalType: 'address',
         name: 'owner',
         type: 'address',
