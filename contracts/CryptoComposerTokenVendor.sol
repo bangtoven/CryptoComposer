@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
 contract CryptoComposerTokenVendor is CryptoComposerToken, Ownable {
-	event BuyToken(address indexed to, uint256 amount);
+	event CCTBought(address indexed by, uint256 amount);
 
 	uint256 public tokenPrice = 10**(18 - 3); // 0.001 ETH
 
@@ -34,7 +34,7 @@ contract CryptoComposerTokenVendor is CryptoComposerToken, Ownable {
 		_mint(msg.sender, amountToBuy);
 		increaseAllowance(cryptoComposerAddress, amountToBuy);
 
-		emit BuyToken(msg.sender, amountToBuy);
+		emit CCTBought(msg.sender, amountToBuy);
 
 		return amountToBuy;
 	}
