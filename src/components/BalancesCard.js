@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import Text from './Text';
 import Card from './Card';
+import Button from 'react-bootstrap/Button';
 import { useWeb3React } from '@web3-react/core';
-import useEth from '../hooks/useEth';
+import styled from 'styled-components';
 import { useAppContext } from '../AppContext';
 import { useContract } from '../hooks/useContract';
 import { CryptoComposerABI, CCTokenABI } from '../static/ABI';
-const { ethers } = require('ethers');
+import { injected } from '../connectors';
+
+const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
 const BalanceCard = () => {
-  const { account, chainId } = useWeb3React();
+  const { activate, active, account, chainId } = useWeb3React();
 
   const contract = useContract('0x06395CAb4F62b17048dF22c6db8D77e65f4a06c7', CryptoComposerABI);
   const tokenContract = useContract('0x88e77ab1f42a75602F568a39857a5F4A6a36b5AC', CCTokenABI);
@@ -59,14 +62,24 @@ const BalanceCard = () => {
       });
   };
 
+  if (!active) {
+    return (
+      <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
+        <Text uppercase t3 lineHeight="40px" className="mx-2">
+          Sign in with Wallet
+        </Text>
+        <ConnectBtn onClick={() => activate(injected)}>Sign in</ConnectBtn>
+      </Card>
+    );
+  }
+
   return (
-    <Card style={{ maxWidth: 300, color: 'gray' }}>
+    <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: 'gray' }}>
       <Text t3 block>
         CryptoComposerToken
       </Text>
-      <Text>price: {exchangeRate / Math.pow(10, 18)} ETH</Text>
       <Text>CCT balance: {cTokenBalance}</Text>
-      <button onClick={buyCCT}>Buy (CCT)</button>
+      <button onClick={buyCCT}>Buy CCT (price: {exchangeRate / Math.pow(10, 18)} ETH)</button>
     </Card>
   );
 };

@@ -33,7 +33,6 @@ const MetamaskConnectButton = () => {
 
   return (
     <Card className="d-flex flex-row justify-content-between" style={{ width: 350 }}>
-      {/* <MetamaskLogo /> */}
       <Text uppercase t3 lineHeight="40px" className="mx-2">
         Connect Wallet
       </Text>
