@@ -1,15 +1,20 @@
 import * as React from 'react';
-import { Song, Track, Instrument, MidiNote } from 'reactronica';
-
+import { Song, Track, Instrument, MidiNote, StepNoteType } from 'reactronica';
 import DAWStepsEditor from '../DAWStepsEditor';
 import { StepIndexContext } from '../../contexts/StepIndexContext';
-import { compress, decompress } from '../../models/Compression';
+import { Button } from 'react-bootstrap';
+import Text from '../Text';
+import { compress } from '../../models/Compression';
 
 type Props = {
   className?: string;
+  onStepEditorChange?: (data: Uint8Array) => void;
 };
 
-const StepsEditor: React.FunctionComponent<Props> = ({ className }) => {
+const StepsEditor: React.FunctionComponent<Props> = ({ className, onStepEditorChange }) => {
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [stepsData, setStepsData] = React.useState(new Uint8Array());
+
   const [currentSteps, setCurrentSteps] = React.useState<{ name: MidiNote }[][]>([
     [{ name: 'C4' }, { name: 'E4' }],
     [{ name: 'E4' }],
@@ -20,11 +25,21 @@ const StepsEditor: React.FunctionComponent<Props> = ({ className }) => {
     [{ name: 'E4' }],
     [{ name: 'D4' }],
   ]);
-  const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
 
   return (
     <StepIndexContext.Provider value={{ currentStepIndex }}>
+      <Button
+        style={{ margin: 10, width: 120, justifyContent: 'center', borderColor: 'white' }}
+        onClick={() => setIsPlaying(!isPlaying)}
+      >
+        {isPlaying ? '⏸️ Stop' : '▶ Play'}
+      </Button>
+
+      <Text t6 color="gray">
+        Notes data: {stepsData}
+      </Text>
+
       <DAWStepsEditor
         subdivision={8}
         steps={currentSteps}
@@ -33,18 +48,15 @@ const StepsEditor: React.FunctionComponent<Props> = ({ className }) => {
         disableScrollIntoView={true}
         onStepEditorChange={(steps) => {
           setCurrentSteps(steps);
-          const [hash, result] = compress(steps);
+          const [hash, data] = compress(steps);
           console.log('hash:', hash);
-          console.log('result', result);
-          decompress(result);
+          console.log('data', data);
+          setStepsData(data);
+          if (onStepEditorChange) {
+            onStepEditorChange(data);
+          }
         }}
       />
-
-      <br />
-      <br />
-      <button style={{ width: 120, justifyContent: 'center' }} onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Stop' : 'Play'}
-      </button>
 
       <Song isPlaying={isPlaying} bpm={100}>
         <Track

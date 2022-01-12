@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import { AppContextProvider } from './AppContext';
 import Text from './components/Text';
+import { Mint } from './pages/Mint';
 
 function getLibrary(provider) {
   return new ethers.providers.Web3Provider(provider);
@@ -24,7 +25,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/mysongs" component={Text} />
-            <Route path="/mint" component={Text} />
+            <Route path="/mint" component={Mint} />
           </Switch>
         </BrowserRouter>
       </Web3ReactProvider>

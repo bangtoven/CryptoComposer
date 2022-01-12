@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import StepsEditor from '../../components/StepsEditor';
+import StepsEditor from '../components/StepsEditor';
 
 const Home = () => {
   return (
