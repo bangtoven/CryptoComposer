@@ -68,7 +68,7 @@ contract CryptoComposerNFTMinter is ERC721, ERC721Enumerable, ERC721Burnable {
 	Counters.Counter private _tokenIdCounter;
 
 	function _baseURI() internal pure override returns (string memory) {
-		return "http://crypto-composer.bangtoven.com/songs/";
+		return "http://crypto-composer.bangtoven.com/metadata/";
 	}
 
 	// The following functions are overrides required by Solidity.

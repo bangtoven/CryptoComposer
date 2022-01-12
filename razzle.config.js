@@ -1,6 +1,6 @@
 module.exports = {
   options: {
-    buildType: 'spa',
+    // buildType: 'spa',
     enableBabelCache: false,
   },
   modifyWebpackConfig(opts) {
