@@ -20,14 +20,16 @@ const App = () => {
   return (
     <AppContextProvider>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <Header />
+        <BrowserRouter>
+          <Header />
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/mysongs" component={MySongs} />
-          <Route path="/mint" component={Mint} />
-          <Route path="/songs/:id" component={Player} />
-        </Switch>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/mysongs" component={MySongs} />
+            <Route path="/mint" component={Mint} />
+            <Route path="/songs/:id" component={Player} />
+          </Switch>
+        </BrowserRouter>
       </Web3ReactProvider>
     </AppContextProvider>
   );

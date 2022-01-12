@@ -1,14 +1,19 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-hydrate(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root'),
-);
+const renderMethod = module.hot ? render : hydrate;
+
+export const Client = () => {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+};
+
+renderMethod(<Client />, document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept();
