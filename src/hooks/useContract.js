@@ -5,11 +5,27 @@ import { useWeb3React } from '@web3-react/core';
 import { CryptoComposerABI, CCTokenABI } from '../static/ABI';
 
 export function useCryptoComposerContract() {
-  return useContract(new Map([[1337, '0x1209d16273E28766f5D6B55e54f177CA62E960A1']]), CryptoComposerABI);
+  return useContract(
+    new Map([
+      [3, '0x1209d16273E28766f5D6B55e54f177CA62E960A1'],
+      [4, ''],
+      [137, ''],
+      [1337, '0xEE7e21964a6d3D5067931008c2D925140f33C58A'],
+    ]),
+    CryptoComposerABI,
+  );
 }
 
 export function useCCTVendorContract() {
-  return useContract(new Map([[1337, '0xE409c88D96042c30A13e0ce1b9153EAf9999e93e']]), CCTokenABI);
+  return useContract(
+    new Map([
+      [3, '0x1209d16273E28766f5D6B55e54f177CA62E960A1'],
+      [4, ''],
+      [137, ''],
+      [1337, '0xda7Ca3DD1223F2d31d65bc5EDdD24f0887B00c54'],
+    ]),
+    CCTokenABI,
+  );
 }
 
 function useContract(contractAddresses, ABI) {
@@ -17,9 +33,7 @@ function useContract(contractAddresses, ABI) {
   const [contractAddress, setContractAddress] = useState(contractAddresses.get(1337));
 
   useEffect(() => {
-    console.log('chainId: ', chainId);
     const address = contractAddresses.get(chainId);
-    console.log('address: ', address);
     if (address) {
       setContractAddress(address);
     }

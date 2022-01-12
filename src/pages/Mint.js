@@ -1,4 +1,5 @@
 import { useWeb3React } from '@web3-react/core';
+import { ethers } from 'ethers';
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import StepsEditor from '../components/StepsEditor';
@@ -6,6 +7,7 @@ import Text from '../components/Text';
 import { TextInput } from '../components/TextInput';
 import { useCryptoComposerContract } from '../hooks/useContract';
 import { colors } from '../theme';
+import { alertError } from '../utils/alertError';
 
 const defaultStepsData = [
   [{ name: 'C4' }, { name: 'E4' }],
@@ -31,18 +33,33 @@ export const Mint = () => {
       return;
     }
 
+    const newTokenId = await contract.totalSupply();
+
     contract
       .mintNewSong(title, stepsData)
-      .then(() => {
+      .then((response) => {
         alert('Minted a new song! Waiting for the transaction to be mined');
+
+        return contract.once(
+          {
+            address: contract.address,
+            topics: [
+              ethers.utils.id('CCNFTMinted(address,string,uint256,bytes32)'),
+              ethers.utils.hexZeroPad(account, 32),
+              null,
+              ethers.utils.hexZeroPad(newTokenId, 32),
+              null,
+            ],
+          },
+          (error, event) => {
+            alert(error);
+            alert(event);
+            alert('confirmed');
+          },
+        );
       })
       .catch((error) => {
-        if (error.data && error.data.message) {
-          alert(error.data.message);
-        } else {
-          alert(error);
-        }
-        console.log('error: ', error);
+        alertError(error);
       });
   };
 

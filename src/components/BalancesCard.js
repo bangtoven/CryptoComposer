@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { useAppContext } from '../AppContext';
 import { useCryptoComposerContract, useCCTVendorContract } from '../hooks/useContract';
 import { injected } from '../connectors';
+import { alertError } from '../utils/alertError';
+import { BigNumber } from 'ethers';
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
@@ -43,9 +45,14 @@ const BalanceCard = () => {
   }, [account, chainId]);
 
   const buyCCT = async () => {
-    console.log(contract);
+    const count = parseInt(prompt('How many CCT do you want to buy?'));
+    if (!count) {
+      alert('Please make sure to enter valid number');
+      return;
+    }
+
     tokenContract
-      .buyTokenToMintNFT({ value: exchangeRate })
+      .buyTokenToMintNFT({ value: BigNumber.from(exchangeRate).mul(count) })
       .then(() => {
         // contract.once(
         //   {
@@ -59,12 +66,7 @@ const BalanceCard = () => {
         alert('Bought 1 CryptoComposerToken! Waiting for the transaction to be mined');
       })
       .catch((error) => {
-        if (error.data && error.data.message) {
-          alert(error.data.message);
-        } else {
-          alert(error);
-        }
-        console.log('error: ', error);
+        alertError(error);
       });
   };
 
@@ -79,13 +81,29 @@ const BalanceCard = () => {
     );
   }
 
+  const chainName = (id) => {
+    switch (id) {
+      case 3:
+        return 'Ropsten';
+      case 4:
+        return 'Rinkeby';
+      case 137:
+        return 'Polygon';
+      case 1337:
+        return 'Local chain';
+      default:
+        return 'unsupported chain';
+    }
+  };
+
   return (
     <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: 'gray' }}>
       <Text t3 block>
         CryptoComposerToken
       </Text>
-      <Text>CCT balance: {cTokenBalance}</Text>
-      <Text>Song counts: {nftCount}</Text>
+      <Text t6>On {chainName(chainId)}</Text>
+      <Text>My CCT balance: {cTokenBalance}</Text>
+      <Text>My Song count: {nftCount}</Text>
       <button onClick={buyCCT}>
         Buy CCT (price: {exchangeRate / Math.pow(10, 18)} {chainId != 137 ? 'ETH' : 'MATIC'})
       </button>

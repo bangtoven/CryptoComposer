@@ -35,7 +35,10 @@ contract CryptoComposerNFTMinter is ERC721, ERC721Enumerable, ERC721Burnable {
 		returns (uint256)
 	{
 		bytes32 hash = keccak256(notes);
-		require(hashes[hash] == false, "Duplicate notes data exist");
+		require(
+			hashes[hash] == false,
+			"Someone else has already registered the same notes."
+		);
 
 		uint256 tokenId = _tokenIdCounter.current();
 		_tokenIdCounter.increment();
