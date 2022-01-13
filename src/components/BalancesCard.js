@@ -82,17 +82,6 @@ const BalanceCard = () => {
       });
   };
 
-  if (!active) {
-    return (
-      <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
-        <Text uppercase t3 lineHeight="40px" className="mx-2">
-          Sign in with Wallet
-        </Text>
-        <ConnectBtn onClick={() => activate(injected)}>Sign in</ConnectBtn>
-      </Card>
-    );
-  }
-
   const chainName = (id) => {
     switch (id) {
       case 3:
@@ -104,9 +93,32 @@ const BalanceCard = () => {
       case 1337:
         return 'Local chain';
       default:
-        return 'unsupported chain';
+        return null;
     }
   };
+
+  if (!active) {
+    if (!chainId) {
+      return (
+        <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
+          <Text t3 lineHeight="40px" className="mx-2">
+            Unsupported Chain
+          </Text>
+          <Text t4>Select Ropsten, Rinkeby, or Polygon</Text>
+        </Card>
+      );
+    }
+
+    return (
+      <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
+        <Text uppercase t3 lineHeight="40px" className="mx-2">
+          Sign in with Wallet
+        </Text>
+        <Text t6>On {chainName(chainId)}</Text>
+        <ConnectBtn onClick={() => activate(injected)}>Sign in</ConnectBtn>
+      </Card>
+    );
+  }
 
   return (
     <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: 'gray' }}>
