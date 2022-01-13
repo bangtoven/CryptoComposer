@@ -9,6 +9,7 @@ import { useCryptoComposerContract, useCCTVendorContract } from '../hooks/useCon
 import { injected } from '../connectors';
 import { alertError } from '../utils/alertError';
 import { BigNumber } from 'ethers';
+import { ethers } from 'ethers';
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
@@ -53,17 +54,28 @@ const BalanceCard = () => {
 
     tokenContract
       .buyTokenToMintNFT({ value: BigNumber.from(exchangeRate).mul(count) })
-      .then(() => {
-        // contract.once(
-        //   {
-        //     address: contract.address,
-        //     topics: [ethers.utils.id('BuyToken(address,uint256)'), ethers.utils.hexZeroPad(account, 32)],
-        //   },
-        //   (error, event) => {
-        //     alert('confirmed');
-        //   },
-        // );
-        alert('Bought 1 CryptoComposerToken! Waiting for the transaction to be mined');
+      .then((response) => {
+        return tokenContract.queryFilter(
+          {
+            address: tokenContract.address,
+            topics: [ethers.utils.id('CCTBought(address,uint256)'), ethers.utils.hexZeroPad(account, 32)],
+          },
+          'latest',
+        );
+      })
+      .then((events) => {
+        console.log(events);
+        if (!events.length) return;
+
+        tokenContract.once(events[0], (...args) => {
+          const allArgs = Array.from(args);
+          const result = allArgs[allArgs.length - 1];
+
+          alert(`${result.event} event emitted
+          ${result.args.amount} CCT purchased by ${result.args.by}
+          on block ${result.blockHash}
+          with tx hash ${result.transactionHash}.`);
+        });
       })
       .catch((error) => {
         alertError(error);

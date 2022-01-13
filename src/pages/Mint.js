@@ -27,36 +27,38 @@ export const Mint = () => {
 
   const contract = useCryptoComposerContract();
 
-  const onClickMint = async () => {
+  const onClickMint = () => {
     if (!title.length) {
       alert('Please name your song.');
       return;
     }
 
-    const newTokenId = await contract.totalSupply();
-
     contract
       .mintNewSong(title, stepsData)
       .then((response) => {
-        alert('Minted a new song! Waiting for the transaction to be mined');
-
-        return contract.once(
+        return contract.queryFilter(
           {
             address: contract.address,
             topics: [
               ethers.utils.id('CCNFTMinted(address,string,uint256,bytes32)'),
               ethers.utils.hexZeroPad(account, 32),
-              null,
-              ethers.utils.hexZeroPad(newTokenId, 32),
-              null,
             ],
           },
-          (error, event) => {
-            alert(error);
-            alert(event);
-            alert('confirmed');
-          },
+          'latest',
         );
+      })
+      .then((events) => {
+        if (!events.length) return;
+
+        contract.once(events[0], (...args) => {
+          const allArgs = Array.from(args);
+          const result = allArgs[allArgs.length - 1];
+
+          alert(`${result.event} event emitted
+          "${result.args.title}" has been registered 
+          on block ${result.blockHash}
+          with tx hash ${result.transactionHash}.`);
+        });
       })
       .catch((error) => {
         alertError(error);
