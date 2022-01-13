@@ -7,6 +7,7 @@ import { withRouter } from 'next/router';
 import Card from './Card';
 import { useWeb3React } from '@web3-react/core';
 import { colors } from '../styles/theme';
+import Navbar from 'react-bootstrap/Navbar';
 
 const NavButton = (props) => (
   <Link href={props.to}>
@@ -38,7 +39,7 @@ const Header = () => {
   const { active } = useWeb3React();
 
   return (
-    <div className="NavBar" style={{ paddingLeft: 50, paddingRight: 50 }}>
+    <Navbar style={{ paddingLeft: 50, paddingRight: 50 }}>
       <img src={'/hero.jpg'} style={{ width: 100, height: 100, borderRadius: '50%' }} />
       <MenuLink activeOnlyWhenExact={true} to="/" label="Home" />
       {active && <MenuLink to="/mysongs" label="My Songs" />}
@@ -47,7 +48,7 @@ const Header = () => {
 
       <div />
       <BalancesCard />
-    </div>
+    </Navbar>
   );
 };
 

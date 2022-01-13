@@ -1,5 +1,5 @@
 import React from 'react';
-import './TextInput.module.css';
+import css from './TextInput.module.scss';
 
 export class TextInput extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ export class TextInput extends React.Component {
   render() {
     const { active, value, error, label } = this.state;
     const { predicted, locked } = this.props;
-    const fieldClassName = `field ${(locked ? active : active || value) && 'active'} ${locked && !active && 'locked'}`;
+    const fieldClassName = `${css.field} ${(locked ? active : active || value) && css.active}`;
 
     return (
       <div className={fieldClassName}>
@@ -45,7 +45,7 @@ export class TextInput extends React.Component {
           onFocus={() => !locked && this.setState({ active: true })}
           onBlur={() => !locked && this.setState({ active: false })}
         />
-        <label htmlFor={1} className={error && 'error'}>
+        <label htmlFor={1} className={error && css.error}>
           {error || label}
         </label>
       </div>

@@ -22,12 +22,15 @@ const Layout = (props) => {
       <Head>
         <title>Crypto Composer</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#000000" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');</style>
       </Head>
-
       <AppContextProvider>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Header />
-          <div className="app">{props.children}</div>
+          <div className="app" id="root">
+            {props.children}
+          </div>
         </Web3ReactProvider>
       </AppContextProvider>
     </div>
