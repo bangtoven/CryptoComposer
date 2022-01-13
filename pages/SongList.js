@@ -1,7 +1,7 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Text from './components/Text';
 import { useCryptoComposerContract } from './hooks/useContract';
 
@@ -37,7 +37,7 @@ const SongList = ({ songIDs, showComposer = true }) => {
         {songs &&
           songs.map((song) => (
             <li key={song.id}>
-              <Link to={`songs/${song.id}`}>
+              <Link href={`songs/${song.id}`}>
                 <Text t3 block>
                   {song.title}
                 </Text>
