@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Text from '../components/Text';
-import { useCryptoComposerContract } from '../hooks/useContract';
+import Text from './components/Text';
+import { useCryptoComposerContract } from './hooks/useContract';
 import SongList from './SongList';
+import Layout from './components/Layout';
 
 const Home = () => {
   const contract = useCryptoComposerContract();
@@ -34,4 +35,10 @@ const Home = () => {
   }
 };
 
-export default Home;
+export default function Index() {
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
+}

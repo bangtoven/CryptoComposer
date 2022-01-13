@@ -1,41 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import Text from './Text';
-import Navbar from 'react-bootstrap/Navbar';
-import MetamaskConnectButton from './MetamaskConnectButton';
 import BalancesCard from './BalancesCard';
 import { useEagerConnect, useInactiveListener } from '../hooks/useEagerConnect';
-import { CryptoComposerABI } from '../static/ABI';
-import { useAppContext } from '../utils/AppContext';
-import { Link, useRouteMatch } from 'react-router-dom';
+import Link from 'next/link';
+import { withRouter } from 'next/router';
 import Card from './Card';
 import { useWeb3React } from '@web3-react/core';
 import { colors } from '../styles/theme';
 
-function MenuLink({ label, to, activeOnlyWhenExact }) {
-  let match = useRouteMatch({
-    path: to,
-    exact: activeOnlyWhenExact,
-  });
-
-  return (
-    <div className={match ? 'active' : ''}>
-      <Link to={to}>
-        <Card
-          style={{
-            width: 160,
-            color: match ? 'white' : colors.lightBlue,
-            background: match ? colors.darkBlue : 'white',
-          }}
-        >
-          <Text t3 block>
-            {match && '> '}
-            {label}
-          </Text>
-        </Card>
-      </Link>
+const NavButton = (props) => (
+  <Link href={props.to}>
+    <div className={`${props.router.pathname === props.to ? 'active' : ''}`}>
+      <Card
+        style={{
+          width: 160,
+          color: props.router.pathname === props.to ? 'white' : colors.lightBlue,
+          background: props.router.pathname === props.to ? colors.darkBlue : 'white',
+        }}
+      >
+        <Text t3 block>
+          {props.router.pathname === props.to && '> '}
+          {props.label}
+        </Text>
+      </Card>
     </div>
-  );
-}
+  </Link>
+);
+
+const MenuLink = withRouter(NavButton);
 
 const Header = () => {
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
@@ -46,7 +38,7 @@ const Header = () => {
   const { active } = useWeb3React();
 
   return (
-    <Navbar className="justify-content-between" style={{ paddingLeft: 50, paddingRight: 50 }}>
+    <div className="NavBar" style={{ paddingLeft: 50, paddingRight: 50 }}>
       <img src={'/hero.jpg'} style={{ width: 100, height: 100, borderRadius: '50%' }} />
       <MenuLink activeOnlyWhenExact={true} to="/" label="Home" />
       {active && <MenuLink to="/mysongs" label="My Songs" />}
@@ -55,7 +47,7 @@ const Header = () => {
 
       <div />
       <BalancesCard />
-    </Navbar>
+    </div>
   );
 };
 

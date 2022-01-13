@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import StepsEditor from '../components/StepsEditor';
-import Text from '../components/Text';
+import StepsEditor from './components/StepsEditor';
+import Text from './components/Text';
 import { useCCTVendorContract, useCryptoComposerContract } from '../hooks/useContract';
-import { decompress } from '../models/Compression';
-import { colors } from '../styles/theme';
+import { decompress } from './models/Compression';
+import { colors } from './styles/theme';
 
 const fromHexString = (hexString) =>
   new Uint8Array(

@@ -1,0 +1,30 @@
+// NavBar.scss
+
+@import "../theme/theme";
+
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 60px;
+  width: 100%;
+  padding: 5px 0;
+
+  background: $primary;
+
+  font-family: $core-font;
+  font-size: 22px;
+  color: $on-primary-light;
+
+  box-shadow: 0px -2px 15px rgba(50, 50, 50, 0.45);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .active {
+    color: $highlight;
+  }
+}

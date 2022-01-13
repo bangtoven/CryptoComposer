@@ -2,8 +2,8 @@ import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Text from '../components/Text';
-import { useCryptoComposerContract } from '../hooks/useContract';
+import Text from './components/Text';
+import { useCryptoComposerContract } from './hooks/useContract';
 
 const SongList = ({ songIDs, showComposer = true }) => {
   const contract = useCryptoComposerContract();

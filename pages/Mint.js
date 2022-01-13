@@ -2,12 +2,13 @@ import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import StepsEditor from '../components/StepsEditor';
-import Text from '../components/Text';
-import { TextInput } from '../components/TextInput';
-import { useCryptoComposerContract } from '../hooks/useContract';
-import { colors } from '../styles/theme';
-import { alertError } from '../utils/alertError';
+import StepsEditor from './components/StepsEditor';
+import Text from './components/Text';
+import { TextInput } from './components/TextInput';
+import { useCryptoComposerContract } from './hooks/useContract';
+import { colors } from './styles/theme';
+import { alertError } from './utils/alertError';
+import Layout from './components/Layout';
 
 const defaultStepsData = [
   [{ name: 'C4' }, { name: 'E4' }],
@@ -20,7 +21,7 @@ const defaultStepsData = [
   [{ name: 'D4' }],
 ];
 
-export const Mint = () => {
+const Mint = () => {
   const { account } = useWeb3React();
   const [title, setTitle] = useState('');
   const [stepsData, setStepsData] = useState(new Uint8Array());
@@ -66,35 +67,39 @@ export const Mint = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <div className="d-flex flex-column justify-content-between">
-        <TextInput label="Title of the song" value={title} onChange={(t) => setTitle(t)} />
-        <Text t6 color={colors.white}>
-          Composer: {account}
-        </Text>
-        <br />
-      </div>
+    <Layout>
+      <Container className="mt-5">
+        <div className="d-flex flex-column justify-content-between">
+          <TextInput label="Title of the song" value={title} onChange={(t) => setTitle(t)} />
+          <Text t6 color={colors.white}>
+            Composer: {account}
+          </Text>
+          <br />
+        </div>
 
-      <Button
-        style={{
-          margin: 10,
-          width: 120,
-          justifyContent: 'center',
-          backgroundColor: 'red',
-          color: 'white',
-          borderColor: 'white',
-        }}
-        onClick={onClickMint}
-      >
-        <Text>⚪ Mint</Text>
-      </Button>
+        <Button
+          style={{
+            margin: 10,
+            width: 120,
+            justifyContent: 'center',
+            backgroundColor: 'red',
+            color: 'white',
+            borderColor: 'white',
+          }}
+          onClick={onClickMint}
+        >
+          <Text>⚪ Mint</Text>
+        </Button>
 
-      <StepsEditor
-        stepsData={defaultStepsData}
-        onStepEditorChange={(data) => {
-          setStepsData(data);
-        }}
-      />
-    </Container>
+        <StepsEditor
+          stepsData={defaultStepsData}
+          onStepEditorChange={(data) => {
+            setStepsData(data);
+          }}
+        />
+      </Container>
+    </Layout>
   );
 };
+
+export default Mint;

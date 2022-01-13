@@ -1,7 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { TransitionMotion, spring } from 'react-motion';
-import './style.css';
+import './TextInput.module.css';
 
 export class TextInput extends React.Component {
   constructor(props) {
