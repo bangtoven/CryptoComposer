@@ -3,7 +3,6 @@ pragma solidity ^0.8.2;
 
 import "./CryptoComposerToken.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/Math.sol";
 
 contract CryptoComposerTokenVendor is CryptoComposerToken, Ownable {
 	event CCTBought(address indexed by, uint256 amount);

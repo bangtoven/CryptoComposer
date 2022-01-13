@@ -4,12 +4,18 @@ pragma solidity ^0.8.2;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 /// @title Contract to mint music NFT
 /// @author Jungho Bang
 /// @notice Allows users to mint their song
-contract CryptoComposerNFTMinter is ERC721, ERC721Enumerable, ERC721Burnable {
+contract CryptoComposerNFTMinter is
+	ERC721,
+	ERC721Enumerable,
+	ERC721Burnable,
+	Ownable
+{
 	event CCNFTMinted(
 		address indexed by,
 		string title,
@@ -70,8 +76,14 @@ contract CryptoComposerNFTMinter is ERC721, ERC721Enumerable, ERC721Burnable {
 
 	Counters.Counter private _tokenIdCounter;
 
-	function _baseURI() internal pure override returns (string memory) {
-		return "http://crypto-composer.bangtoven.com/metadata/";
+	string public baseURI = "http://crypto-composer.bangtoven.com/metadata/";
+
+	function _baseURI() internal view override returns (string memory) {
+		return baseURI;
+	}
+
+	function setBaseURI(string calldata _newURI) external onlyOwner {
+		baseURI = _newURI;
 	}
 
 	// The following functions are overrides required by Solidity.
