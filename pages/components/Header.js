@@ -39,7 +39,7 @@ const Header = () => {
   const { active } = useWeb3React();
 
   return (
-    <Navbar style={{ paddingLeft: 50, paddingRight: 50 }}>
+    <Navbar className="justify-content-between" style={{ paddingLeft: 50, paddingRight: 50 }}>
       <img src={'/hero.jpg'} style={{ width: 100, height: 100, borderRadius: '50%' }} />
       <MenuLink activeOnlyWhenExact={true} to="/" label="Home" />
       {active && <MenuLink to="/mysongs" label="My Songs" />}

@@ -7,18 +7,15 @@ import { AppContextProvider } from '../utils/AppContext';
 import { Web3ReactProvider } from '@web3-react/core';
 
 import { ethers } from 'ethers';
-import './Layout.module.css';
+import css from './Layout.module.css';
 
 function getLibrary(provider) {
   return new ethers.providers.Web3Provider(provider);
 }
 
-// import './Layout.scss';
-// import './index.scss';
-
 const Layout = (props) => {
   return (
-    <div className="Layout">
+    <div>
       <Head>
         <title>Crypto Composer</title>
         <link rel="icon" href="/favicon.ico" />
@@ -28,9 +25,7 @@ const Layout = (props) => {
       <AppContextProvider>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Header />
-          <div className="app" id="root">
-            {props.children}
-          </div>
+          <div className={css.main}>{props.children}</div>
         </Web3ReactProvider>
       </AppContextProvider>
     </div>
