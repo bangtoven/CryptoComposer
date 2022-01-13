@@ -11,7 +11,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const NavButton = (props) => (
   <Link href={props.to}>
-    <div className={`${props.router.pathname === props.to ? 'active' : ''}`}>
+    <a className={`${props.router.pathname === props.to ? 'active' : ''}`}>
       <Card
         style={{
           width: 160,
@@ -24,7 +24,7 @@ const NavButton = (props) => (
           {props.label}
         </Text>
       </Card>
-    </div>
+    </a>
   </Link>
 );
 

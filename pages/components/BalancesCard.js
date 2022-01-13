@@ -10,23 +10,24 @@ import { injected } from '../utils/connectors';
 import { alertError } from '../utils/alertError';
 import { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
+import theme from '../styles/theme';
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
 const BalanceCard = () => {
-  const { activate, active, account, chainId } = useWeb3React();
-
-  const contract = useCryptoComposerContract();
-  const tokenContract = useCCTVendorContract();
+  const { activate, active, account, chainId, connector } = useWeb3React();
 
   const { exchangeRate, setExchangeRate } = useAppContext();
   const { cTokenBalance, setCTokenBalance } = useAppContext();
   const [nftCount, setNftCount] = useState(0);
 
+  const contract = useCryptoComposerContract();
+  const tokenContract = useCCTVendorContract();
+
   useEffect(async () => {
     const price = (await tokenContract.tokenPrice()).toNumber();
     setExchangeRate(price);
-  }, [contract]);
+  }, [tokenContract]);
 
   const fetchCCTokenBalance = async () => {
     const ccTokenBalance = await tokenContract.balanceOf(account);
@@ -39,11 +40,11 @@ const BalanceCard = () => {
   };
 
   useEffect(() => {
-    if (account) {
+    if (account && cTokenBalance == '--') {
       fetchCCTokenBalance();
       fetchNFTCounts();
     }
-  }, [account, chainId]);
+  }, [account, chainId, tokenContract]);
 
   const buyCCT = async () => {
     const count = parseInt(prompt('How many CCT do you want to buy?'));
@@ -82,6 +83,33 @@ const BalanceCard = () => {
       });
   };
 
+  // TODO
+  // const importCCT = async () => {
+  //   try {
+  //     // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  //     const wasAdded = await ethereum.request({
+  //       method: 'wallet_watchAsset',
+  //       params: {
+  //         type: 'ERC20', // Initially only supports ERC20, but eventually more!
+  //         options: {
+  //           address: tokenAddress, // The address that the token is at.
+  //           symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+  //           decimals: tokenDecimals, // The number of decimals in the token
+  //           image: tokenImage, // A string url of the token logo
+  //         },
+  //       },
+  //     });
+
+  //     if (wasAdded) {
+  //       console.log('Thanks for your interest!');
+  //     } else {
+  //       console.log('Your loss!');
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const chainName = (id) => {
     switch (id) {
       case 3:
@@ -98,38 +126,27 @@ const BalanceCard = () => {
   };
 
   if (!active) {
-    if (!chainId) {
-      return (
-        <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
-          <Text t3 lineHeight="40px" className="mx-2">
-            Unsupported Chain
-          </Text>
-          <Text t4>Select Ropsten, Rinkeby, or Polygon</Text>
-        </Card>
-      );
-    }
-
     return (
       <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
         <Text uppercase t3 lineHeight="40px" className="mx-2">
           Sign in with Wallet
         </Text>
-        <Text t6>On {chainName(chainId)}</Text>
+        <Text t4>Select Ropsten, Rinkeby, or Polygon</Text>
         <ConnectBtn onClick={() => activate(injected)}>Sign in</ConnectBtn>
       </Card>
     );
   }
 
   return (
-    <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: 'gray' }}>
-      <Text t3 block>
+    <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: theme.lightBlue }}>
+      <Text t3 block color={theme.darkBlue}>
         CryptoComposerToken
       </Text>
       <Text t6>On {chainName(chainId)}</Text>
       <Text>
         🪙 CCT balance: {cTokenBalance} 🎶 Song count: {nftCount}
       </Text>
-      <button onClick={buyCCT}>
+      <button onClick={buyCCT} style={{ backgroundColor: theme.darkBlue, color: 'white' }}>
         Buy CCT (price: {exchangeRate / Math.pow(10, 18)} {chainId != 137 ? 'ETH' : 'MATIC'})
       </button>
     </Card>

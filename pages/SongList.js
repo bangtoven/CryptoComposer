@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import Link from 'next/link';
 import Text from './components/Text';
 import { useCryptoComposerContract } from './hooks/useContract';
+import theme from './styles/theme';
 
 const SongList = ({ songIDs, showComposer = true }) => {
   const contract = useCryptoComposerContract();
@@ -28,7 +29,7 @@ const SongList = ({ songIDs, showComposer = true }) => {
     if (!songs) {
       fetchSongs();
     }
-  }, [songIDs]);
+  }, [songIDs, contract]);
 
   return (
     <Container className="mt-5">
@@ -37,18 +38,20 @@ const SongList = ({ songIDs, showComposer = true }) => {
         {songs &&
           songs.map((song) => (
             <li key={song.id}>
-              <Link href={`songs/${song.id}`}>
-                <Text t3 block>
-                  {song.title}
-                </Text>
-                {showComposer && (
-                  <Text t4 block style={song.composer == account ? { color: 'white' } : {}}>
-                    composed by: {song.composer == account ? 'YOU!' : song.composer}
+              <Link href={`/songs/${song.id}`}>
+                <a style={{ color: theme.green }}>
+                  <Text t3 block>
+                    {song.title}
                   </Text>
-                )}
-                <Text t6 block>
-                  {song.notes}
-                </Text>
+                  {showComposer && (
+                    <Text t4 block style={song.composer == account ? { color: 'white' } : {}}>
+                      composed by: {song.composer == account ? 'YOU!' : song.composer}
+                    </Text>
+                  )}
+                  <Text t6 block>
+                    {song.notes}
+                  </Text>
+                </a>
               </Link>
             </li>
           ))}
