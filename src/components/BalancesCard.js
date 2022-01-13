@@ -114,8 +114,9 @@ const BalanceCard = () => {
         CryptoComposerToken
       </Text>
       <Text t6>On {chainName(chainId)}</Text>
-      <Text>My CCT balance: {cTokenBalance}</Text>
-      <Text>My Song count: {nftCount}</Text>
+      <Text>
+        🪙 CCT balance: {cTokenBalance} 🎶 Song count: {nftCount}
+      </Text>
       <button onClick={buyCCT}>
         Buy CCT (price: {exchangeRate / Math.pow(10, 18)} {chainId != 137 ? 'ETH' : 'MATIC'})
       </button>

@@ -22,7 +22,7 @@ function MenuLink({ label, to, activeOnlyWhenExact }) {
       <Link to={to}>
         <Card
           style={{
-            width: 200,
+            width: 160,
             color: match ? 'white' : colors.lightBlue,
             background: match ? colors.darkBlue : 'white',
           }}
@@ -46,7 +46,8 @@ const Header = () => {
   const { active } = useWeb3React();
 
   return (
-    <Navbar className="justify-content-between">
+    <Navbar className="justify-content-between" style={{ paddingLeft: 50, paddingRight: 50 }}>
+      <img src={'/hero.jpg'} style={{ width: 100, height: 100, borderRadius: '50%' }} />
       <MenuLink activeOnlyWhenExact={true} to="/" label="Home" />
       {active && <MenuLink to="/mysongs" label="My Songs" />}
       {active && <MenuLink to="/mint" label="Mint new" />}
