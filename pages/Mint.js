@@ -2,13 +2,13 @@ import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import StepsEditor from './components/StepsEditor';
-import Text from './components/Text';
-import { TextInput } from './components/TextInput';
-import { useCryptoComposerContract } from './hooks/useContract';
-import { colors } from './styles/theme';
-import { alertError } from './utils/alertError';
-import Layout from './components/Layout';
+import StepsEditor from '../components/StepsEditor';
+import Text from '../components/Text';
+import { TextInput } from '../components/TextInput';
+import { useCryptoComposerContract } from '../hooks/useContract';
+import { colors } from '../styles/theme';
+import { alertError } from '../utils/alertError';
+import Layout from '../components/Layout';
 
 const defaultStepsData = [
   [{ name: 'C4' }, { name: 'E4' }],

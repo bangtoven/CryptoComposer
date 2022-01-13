@@ -1,9 +1,9 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
-import Text from './components/Text';
-import { useCryptoComposerContract } from './hooks/useContract';
-import SongList from './SongList';
-import Layout from './components/Layout';
+import Text from '../components/Text';
+import { useCryptoComposerContract } from '../hooks/useContract';
+import SongList from '../components/SongList';
+import Layout from '../components/Layout';
 
 const MySongsBody = () => {
   const contract = useCryptoComposerContract();

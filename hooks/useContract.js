@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Contract } from '@ethersproject/contracts';
 import { AddressZero } from '@ethersproject/constants';
 import { useWeb3React } from '@web3-react/core';
-import { CryptoComposerABI, CCTokenABI } from '../static/ABI';
+import { CryptoComposerABI, CCTokenABI } from './ABI';
 
 export function useCryptoComposerContract() {
   return useContract(
