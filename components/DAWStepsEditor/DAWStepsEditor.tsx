@@ -2,8 +2,8 @@ import React from 'react';
 import { MidiNote, StepNoteType } from 'reactronica';
 import produce from 'immer';
 
-import { midiNotes } from '../../models/midiConfig';
-import { StepIndexContext } from '../../contexts/StepIndexContext';
+import { midiNotes } from './midiConfig';
+import { StepIndexContext } from './StepIndexContext';
 
 import css from './DAWStepsEditor.module.scss';
 

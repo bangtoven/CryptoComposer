@@ -7,7 +7,7 @@ import Text from '../../components/Text';
 import { TextInput } from '../../components/TextInput';
 import { useCryptoComposerContract } from '../../hooks/useContract';
 import { colors } from '../../styles/theme';
-import { alertError } from '../../utils/alertError';
+import { alertError } from '../../components/utils/alertError';
 import Layout from '../../components/Layout';
 
 const defaultStepsData = [

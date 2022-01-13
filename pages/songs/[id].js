@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import StepsEditor from '../../components/StepsEditor';
 import Text from '../../components/Text';
 import { useCryptoComposerContract } from '../../hooks/useContract';
-import { decompress } from '../../models/Compression';
+import { decompress } from '../../components/utils/Compression';
 import { colors } from '../../styles/theme';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';

@@ -1,5 +1,5 @@
 import { StepNoteType } from 'reactronica';
-import { midiNotes } from './midiConfig';
+import { midiNotes } from '../DAWStepsEditor/midiConfig';
 import LZUTF8 from 'lzutf8';
 import CryptoJS from 'crypto-js';
 

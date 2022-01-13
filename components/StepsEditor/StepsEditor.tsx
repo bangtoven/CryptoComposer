@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Song, Track, Instrument, MidiNote, StepNoteType } from 'reactronica';
 import DAWStepsEditor from '../DAWStepsEditor';
-import { StepIndexContext } from '../../contexts/StepIndexContext';
+import { StepIndexContext } from '../DAWStepsEditor/StepIndexContext';
 import { Button } from 'react-bootstrap';
 import Text from '../Text';
-import { compress } from '../../models/Compression';
+import { compress } from '../utils/Compression';
 
 type Props = {
   className?: string;

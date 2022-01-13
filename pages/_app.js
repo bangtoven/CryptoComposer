@@ -3,7 +3,7 @@ import '../styles/global.scss';
 import '../styles/app.module.scss';
 import { ethers } from 'ethers';
 
-import { AppContextProvider } from '../utils/AppContext';
+import { AppContextProvider } from '../components/utils/AppContext';
 import { Web3ReactProvider } from '@web3-react/core';
 
 function getLibrary(provider) {
