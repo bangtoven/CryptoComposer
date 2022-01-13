@@ -15,4 +15,5 @@ public/static
 cache
 cypress/screenshots/
 .vercel
+.next/
 .secret

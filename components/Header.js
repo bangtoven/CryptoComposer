@@ -5,11 +5,11 @@ import MetamaskConnectButton from './MetamaskConnectButton';
 import BalancesCard from './BalancesCard';
 import { useEagerConnect, useInactiveListener } from '../hooks/useEagerConnect';
 import { CryptoComposerABI } from '../static/ABI';
-import { useAppContext } from '../AppContext';
+import { useAppContext } from '../utils/AppContext';
 import { Link, useRouteMatch } from 'react-router-dom';
 import Card from './Card';
 import { useWeb3React } from '@web3-react/core';
-import { colors } from '../theme';
+import { colors } from '../styles/theme';
 
 function MenuLink({ label, to, activeOnlyWhenExact }) {
   let match = useRouteMatch({

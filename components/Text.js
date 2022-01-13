@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme, { textSizes } from '../theme';
+import theme, { textSizes } from '../styles/theme';
 
 const getColor = (p) => {
   // @ts-ignore

@@ -1,13 +1,13 @@
 {
-  "name": "blockchain-developer-bootcamp-final-project",
-  "homepage": "http://bangtoven.github.io/blockchain-developer-bootcamp-final-project",
+  "name": "crypto-composer",
+  "homepage": "https://crypto-composer.bangtoven.com",
   "version": "1.0.0",
-  "license": "UNLICENSED",
+  "license": "GPL",
   "scripts": {
-    "start": "razzle start",
-    "build": "razzle build --noninteractive ",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build/public"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/crypto-js": "^4.0.2",
@@ -17,6 +17,7 @@
     "crypto-js": "^4.1.1",
     "ethers": "^5.1.0",
     "lzutf8": "^0.6.0",
+    "next": "^12.0.8",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-icons": "^1.4.0",

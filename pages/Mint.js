@@ -6,7 +6,7 @@ import StepsEditor from '../components/StepsEditor';
 import Text from '../components/Text';
 import { TextInput } from '../components/TextInput';
 import { useCryptoComposerContract } from '../hooks/useContract';
-import { colors } from '../theme';
+import { colors } from '../styles/theme';
 import { alertError } from '../utils/alertError';
 
 const defaultStepsData = [

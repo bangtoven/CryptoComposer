@@ -3,11 +3,11 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { ethers } from 'ethers';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './styles/base.scss';
-import css from './app.module.scss';
+import css from './styles/app.module.scss';
 
 import Home from './pages/Home';
 import Header from './components/Header';
-import { AppContextProvider } from './AppContext';
+import { AppContextProvider } from './utils/AppContext';
 import { Mint } from './pages/Mint';
 import { Player } from './pages/Player';
 import MySongs from './pages/MySongs';

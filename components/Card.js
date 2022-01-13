@@ -1,6 +1,6 @@
 import { Card as BootstrapCard } from 'react-bootstrap';
 import styled from 'styled-components';
-import { colors } from '../theme';
+import { colors } from '../styles/theme';
 
 const Card = styled(BootstrapCard)`
   width: 100%;
