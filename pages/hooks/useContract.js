@@ -10,7 +10,7 @@ export function useCryptoComposerContract() {
       [3, '0x1209d16273E28766f5D6B55e54f177CA62E960A1'],
       [4, ''],
       [137, ''],
-      [1337, '0xEE7e21964a6d3D5067931008c2D925140f33C58A'],
+      [1337, '0x66505759Af3989D45906A79fB7A2d8160F16B5A8'],
     ]),
     CryptoComposerABI,
   );
@@ -22,7 +22,7 @@ export function useCCTVendorContract() {
       [3, '0x1209d16273E28766f5D6B55e54f177CA62E960A1'],
       [4, ''],
       [137, ''],
-      [1337, '0xda7Ca3DD1223F2d31d65bc5EDdD24f0887B00c54'],
+      [1337, '0x9d184B3aeef268B227bd60D74beE97FF49f3D922'],
     ]),
     CCTokenABI,
   );
