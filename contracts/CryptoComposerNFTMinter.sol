@@ -76,7 +76,8 @@ contract CryptoComposerNFTMinter is
 
 	Counters.Counter private _tokenIdCounter;
 
-	string public baseURI = "http://crypto-composer.bangtoven.com/metadata/";
+	string public baseURI =
+		"http://crypto-composer.bangtoven.com/api/metadata/";
 
 	function _baseURI() internal view override returns (string memory) {
 		return baseURI;

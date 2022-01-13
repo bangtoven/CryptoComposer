@@ -7,8 +7,8 @@ import { CryptoComposerABI, CCTokenABI } from '../static/ABI';
 export function useCryptoComposerContract() {
   return useContract(
     new Map([
-      [3, '0x1209d16273E28766f5D6B55e54f177CA62E960A1'],
-      [4, ''],
+      [3, '0xA27FACD3FB95E8a159f69522151caA6DA4224EC2'],
+      [4, '0xDE58a83BC2634753143C555dD08d47D22463E71f'],
       [137, ''],
       [1337, '0x66505759Af3989D45906A79fB7A2d8160F16B5A8'],
     ]),
@@ -19,8 +19,8 @@ export function useCryptoComposerContract() {
 export function useCCTVendorContract() {
   return useContract(
     new Map([
-      [3, '0x1209d16273E28766f5D6B55e54f177CA62E960A1'],
-      [4, ''],
+      [3, '0xE92DB29c68EA1A4AFa30b6D777CCcB78d16033f1'],
+      [4, '0x9F4067FC1c0E6BcA242D548380525257Ab6c9cAB'],
       [137, ''],
       [1337, '0x9d184B3aeef268B227bd60D74beE97FF49f3D922'],
     ]),
