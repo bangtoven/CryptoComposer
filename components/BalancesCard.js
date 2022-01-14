@@ -20,6 +20,7 @@ const BalanceCard = () => {
   const { exchangeRate, setExchangeRate } = useAppContext();
   const { cTokenBalance, setCTokenBalance } = useAppContext();
   const [nftCount, setNftCount] = useState(0);
+  const [manualRefresh, setManualRefresh] = useState(0);
 
   const contract = useCryptoComposerContract();
   const tokenContract = useCCTVendorContract();
@@ -40,11 +41,11 @@ const BalanceCard = () => {
   };
 
   useEffect(() => {
-    if (account && cTokenBalance == '--') {
+    if (account) {
       fetchCCTokenBalance();
       fetchNFTCounts();
     }
-  }, [account, chainId, tokenContract]);
+  }, [account, chainId, tokenContract, manualRefresh]);
 
   const buyCCT = async () => {
     const count = parseInt(prompt('How many CCT do you want to buy?'));
@@ -139,9 +140,25 @@ const BalanceCard = () => {
 
   return (
     <Card className="d-flex flex-column justify-content-between" style={{ width: 350, color: theme.lightBlue }}>
-      <Text t3 block color={theme.darkBlue}>
-        CryptoComposerToken
-      </Text>
+      <div style={{ flexDirection: 'row' }}>
+        <Text t3 color={theme.darkBlue}>
+          CryptoComposerToken
+        </Text>
+        <button
+          onClick={() => {
+            setManualRefresh(manualRefresh + 1);
+          }}
+          style={{
+            fontSize: '30px',
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+            padding: 0,
+            paddingLeft: '10px',
+          }}
+        >
+          🔄
+        </button>
+      </div>
       <Text t6>On {chainName(chainId)}</Text>
       <Text>
         🪙 CCT balance: {cTokenBalance} 🎶 Song count: {nftCount}
