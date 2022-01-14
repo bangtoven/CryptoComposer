@@ -6,7 +6,7 @@ import { useWeb3React } from '@web3-react/core';
 import styled from 'styled-components';
 import { useAppContext } from './utils/AppContext';
 import { useCryptoComposerContract, useCCTVendorContract } from '../hooks/useContract';
-import { injected } from './utils/connectors';
+import { getChainName, injected } from './utils/connectors';
 import { alertError } from './utils/alertError';
 import { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
@@ -26,9 +26,11 @@ const BalanceCard = () => {
   const tokenContract = useCCTVendorContract();
 
   useEffect(async () => {
-    const price = (await tokenContract.tokenPrice()).toNumber();
-    setExchangeRate(price);
-  }, [tokenContract]);
+    if (!exchangeRate) {
+      const price = (await tokenContract.tokenPrice()).toNumber();
+      setExchangeRate(price);
+    }
+  }, [tokenContract, chainId]);
 
   const fetchCCTokenBalance = async () => {
     const ccTokenBalance = await tokenContract.balanceOf(account);
@@ -41,11 +43,18 @@ const BalanceCard = () => {
   };
 
   useEffect(() => {
-    if (account) {
+    if (account && cTokenBalance == '--') {
       fetchCCTokenBalance();
       fetchNFTCounts();
     }
-  }, [account, chainId, tokenContract, manualRefresh]);
+  }, [tokenContract, account, chainId]);
+
+  useEffect(() => {
+    if (manualRefresh) {
+      fetchCCTokenBalance();
+      fetchNFTCounts();
+    }
+  }, [manualRefresh]);
 
   const buyCCT = async () => {
     const count = parseInt(prompt('How many CCT do you want to buy?'));
@@ -111,21 +120,6 @@ const BalanceCard = () => {
   //   }
   // };
 
-  const chainName = (id) => {
-    switch (id) {
-      case 3:
-        return 'Ropsten';
-      case 4:
-        return 'Rinkeby';
-      case 137:
-        return 'Polygon';
-      case 1337:
-        return 'Local chain';
-      default:
-        return null;
-    }
-  };
-
   if (!active) {
     return (
       <Card className="d-flex justify-content-between" style={{ width: 350, color: 'gray' }}>
@@ -159,7 +153,7 @@ const BalanceCard = () => {
           🔄
         </button>
       </div>
-      <Text t6>On {chainName(chainId)}</Text>
+      <Text t6>On {getChainName(chainId)}</Text>
       <Text>
         🪙 CCT balance: {cTokenBalance} 🎶 Song count: {nftCount}
       </Text>

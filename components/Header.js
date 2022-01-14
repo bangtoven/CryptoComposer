@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import Text from './Text';
 import BalancesCard from './BalancesCard';
 import { useEagerConnect, useInactiveListener } from '../hooks/useEagerConnect';

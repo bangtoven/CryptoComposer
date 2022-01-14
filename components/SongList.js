@@ -26,7 +26,7 @@ const SongList = ({ songIDs, showComposer = true }) => {
       setSongs(songsWithTokenId);
     }
 
-    if (!songs) {
+    if (songs == null) {
       fetchSongs();
     }
   }, [songIDs, contract]);
