@@ -46,7 +46,6 @@ const getTransform = (p) => {
 };
 
 const Text = styled.span`
-  font-family: ${(p) => p.fontFamily || 'Noto Sans'};
   text-decoration: ${(p) => (p.underline ? 'underline' : '')};
   text-transform: ${getTransform};
   cursor: ${(p) => (p.pointer ? 'pointer' : '')};
