@@ -50,21 +50,13 @@ export const AlertContextProvider = ({ children }) => {
         window.error = error;
 
         var errorMessage = '';
-        if (error.data && error.data.message) {
-          errorMessage = error.data.message;
-          const index = errorMessage.indexOf('revert');
-          if (index) {
-            errorMessage = errorMessage.slice(index + 7);
-          }
+        const nestedError = error.data ?? error.error;
+        if (nestedError && nestedError.message) {
+          errorMessage = nestedError.message;
         } else if (error.message) {
           errorMessage = error.message;
         } else {
           errorMessage = error.toString();
-        }
-
-        const duplicateHashErr = 'Someone else has already registered the same notes.';
-        if (errorMessage.includes(duplicateHashErr)) {
-          errorMessage = duplicateHashErr;
         }
 
         setAlertStates({
