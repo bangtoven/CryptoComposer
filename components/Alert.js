@@ -76,11 +76,11 @@ export const AlertContextProvider = ({ children }) => {
   };
 
   const handleClose = () => {
+    setShow(false);
     setTitle('');
     setBody('');
     setButtonTitle(null);
     setButtonAction(null);
-    setShow(false);
   };
 
   const ActionableButton = () => {
