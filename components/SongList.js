@@ -41,7 +41,7 @@ const SongList = ({ songIDs, showComposer = true }) => {
               <Link href={`/songs/${song.id}`}>
                 <a style={{ color: theme.green }}>
                   <Text t3 block>
-                    {song.title}
+                    [#{song.id}] {song.title}
                   </Text>
                   {showComposer && (
                     <Text t4 block style={song.composer == account ? { color: 'white' } : {}}>

@@ -11,12 +11,13 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchSongIDs() {
-      const totalSupply = await contract.totalSupply();
-      const idBNs = await Promise.all(
-        Array.from(Array(totalSupply.toNumber())).map((_, i) => contract.tokenByIndex(i)),
-      );
-      const ids = idBNs.map((n) => n.toNumber());
-      setSongIDs(ids);
+      const totalSupply = (await contract.totalSupply()).toNumber();
+
+      // most recent songs, at most 10 of them
+      const count = Math.min(10, totalSupply);
+      const indices = [...Array(count).keys()].map((i) => totalSupply - 1 - i);
+      const songIDs = await Promise.all(indices.map((i) => contract.tokenByIndex(i).then((id) => id.toNumber())));
+      setSongIDs(songIDs);
     }
 
     if (!songIDs) {
