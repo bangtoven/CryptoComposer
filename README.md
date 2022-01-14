@@ -2,11 +2,12 @@
 
 // TODO
 
-- google analytics
 - documents
 - comments
-- test on other device
+- test on other device (with phone)
 - video
+- google analytics
+- polygon
 
 ## Idea
 
