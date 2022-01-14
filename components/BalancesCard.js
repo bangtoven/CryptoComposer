@@ -11,11 +11,12 @@ import { alertError } from './utils/alertError';
 import { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
 import theme from '../styles/theme';
+import { useAlert } from './Alert';
 
 const ConnectBtn = styled(Button).attrs({ variant: 'outline-dark' })``;
 
 const BalanceCard = () => {
-  const { activate, active, account, chainId, connector } = useWeb3React();
+  const { activate, active, account, chainId } = useWeb3React();
 
   const { exchangeRate, setExchangeRate } = useAppContext();
   const { cTokenBalance, setCTokenBalance } = useAppContext();
@@ -24,6 +25,8 @@ const BalanceCard = () => {
 
   const contract = useCryptoComposerContract();
   const tokenContract = useCCTVendorContract();
+
+  const alert = useAlert();
 
   useEffect(async () => {
     if (!exchangeRate) {
@@ -56,69 +59,48 @@ const BalanceCard = () => {
     }
   }, [manualRefresh]);
 
-  const buyCCT = async () => {
+  const buyCCT = () => {
     const count = parseInt(prompt('How many CCT do you want to buy?'));
     if (!count) {
-      alert('Please make sure to enter valid number');
+      alert.show({ title: '!', body: 'Please make sure to enter valid number' });
       return;
     }
 
     tokenContract
       .buyTokenToMintNFT({ value: BigNumber.from(exchangeRate).mul(count) })
       .then((response) => {
-        return tokenContract.queryFilter(
+        const txHash = response.hash;
+
+        alert.showTx({
+          title: `Pending`,
+          body: `Check tx ${txHash}. on Etherscan`,
+          txHash: txHash,
+        });
+
+        tokenContract.once(
           {
             address: tokenContract.address,
             topics: [ethers.utils.id('CCTBought(address,uint256)'), ethers.utils.hexZeroPad(account, 32)],
           },
-          'latest',
+          (...args) => {
+            const allArgs = Array.from(args);
+            const result = allArgs[allArgs.length - 1];
+            alert.showTx({
+              title: `${result.event} event emitted`,
+              body: `
+                ${result.args.amount} CCT purchased by ${result.args.by}
+                on block ${result.blockHash}
+                with tx hash ${result.transactionHash}.
+              `,
+              txHash: txHash,
+            });
+          },
         );
-      })
-      .then((events) => {
-        console.log(events);
-        if (!events.length) return;
-
-        tokenContract.once(events[0], (...args) => {
-          const allArgs = Array.from(args);
-          const result = allArgs[allArgs.length - 1];
-
-          alert(`${result.event} event emitted
-          ${result.args.amount} CCT purchased by ${result.args.by}
-          on block ${result.blockHash}
-          with tx hash ${result.transactionHash}.`);
-        });
       })
       .catch((error) => {
         alertError(error);
       });
   };
-
-  // TODO
-  // const importCCT = async () => {
-  //   try {
-  //     // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-  //     const wasAdded = await ethereum.request({
-  //       method: 'wallet_watchAsset',
-  //       params: {
-  //         type: 'ERC20', // Initially only supports ERC20, but eventually more!
-  //         options: {
-  //           address: tokenAddress, // The address that the token is at.
-  //           symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-  //           decimals: tokenDecimals, // The number of decimals in the token
-  //           image: tokenImage, // A string url of the token logo
-  //         },
-  //       },
-  //     });
-
-  //     if (wasAdded) {
-  //       console.log('Thanks for your interest!');
-  //     } else {
-  //       console.log('Your loss!');
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   if (!active) {
     return (
