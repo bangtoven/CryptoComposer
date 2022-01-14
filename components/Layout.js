@@ -11,7 +11,7 @@ const Layout = (props) => {
       <Head>
         <title>Crypto Composer</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.1" />
         <meta name="theme-color" content="#000000" />
         <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');</style>
       </Head>
