@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { useAppContext } from './utils/AppContext';
 import { useCryptoComposerContract, useCCTVendorContract } from '../hooks/useContract';
 import { getChainName, injected } from './utils/connectors';
-import { alertError } from './utils/alertError';
 import { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
 import theme from '../styles/theme';
@@ -73,7 +72,7 @@ const BalanceCard = () => {
 
         alert.showTx({
           title: `Pending`,
-          body: `Check tx ${txHash}. on Etherscan`,
+          body: `Check tx ${txHash} on Etherscan`,
           txHash: txHash,
         });
 
@@ -98,7 +97,7 @@ const BalanceCard = () => {
         );
       })
       .catch((error) => {
-        alertError(error);
+        alert.showError(error);
       });
   };
 

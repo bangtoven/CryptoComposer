@@ -45,6 +45,33 @@ export const AlertContextProvider = ({ children }) => {
           },
         });
       },
+      showError: (error) => {
+        console.log('error: ', error);
+        window.error = error;
+
+        var errorMessage = '';
+        if (error.data && error.data.message) {
+          errorMessage = error.data.message;
+          const index = errorMessage.indexOf('revert');
+          if (index) {
+            errorMessage = errorMessage.slice(index + 7);
+          }
+        } else if (error.message) {
+          errorMessage = error.message;
+        } else {
+          errorMessage = error.toString();
+        }
+
+        const duplicateHashErr = 'Someone else has already registered the same notes.';
+        if (errorMessage.includes(duplicateHashErr)) {
+          errorMessage = duplicateHashErr;
+        }
+
+        setAlertStates({
+          title: 'Error!',
+          body: errorMessage,
+        });
+      },
     },
   };
 
@@ -60,12 +87,12 @@ export const AlertContextProvider = ({ children }) => {
     if (ButtonTitle) {
       return (
         <Button
+          style={{ color: 'white', backgroundColor: theme.darkBlue }}
           variant="primary"
           onClick={() => {
             if (ButtonAction != null) {
               ButtonAction();
             }
-            handleClose();
           }}
         >
           {ButtonTitle}
@@ -85,31 +112,15 @@ export const AlertContextProvider = ({ children }) => {
         </Modal.Header>
         <Modal.Body style={{ color: theme.darkBlue }}>{Body}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button
+            style={{ borderColor: theme.lightBlue, color: theme.darkBlue, backgroundColor: 'transparent' }}
+            onClick={handleClose}
+          >
             Close
           </Button>
           <ActionableButton />
         </Modal.Footer>
       </Modal>
     </AlertContext.Provider>
-  );
-};
-
-export const Alert = ({ show, onHide }) => {
-  return (
-    <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={onHide}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
-    </Modal>
   );
 };
