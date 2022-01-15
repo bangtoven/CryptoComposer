@@ -11,7 +11,7 @@ export default function OpenSea({ songId }) {
       <Link href={`https://testnets.opensea.io/assets/0x91922dc7384b62f5ae2f3e12d26597c36ad3b80e/${songId}`}>
         <a target="_blank" style={{ color: theme.lightBlue }}>
           <Text t2 block>
-            See them on OpenSea
+            See on OpenSea
           </Text>
         </a>
       </Link>

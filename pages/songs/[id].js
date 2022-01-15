@@ -7,6 +7,7 @@ import { decompress } from '../../components/utils/Compression';
 import { colors } from '../../styles/theme';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
+import OpenSea from '../../components/OpenSea';
 
 const fromHexString = (hexString) =>
   new Uint8Array(
@@ -43,6 +44,7 @@ export default function Player() {
     <Layout>
       {song && (
         <Container className="mt-5">
+          <OpenSea songId={id} />
           <Text t2 color={colors.white}>
             {song.title}
           </Text>
