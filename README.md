@@ -15,7 +15,7 @@
   - or accessing directly via link. e.g. https://crypto-composer.bangtoven.com/songs/0
 - Buy CCT(CryptoComposerToken) to pay for minting new songs
 - Write a new song and mint it as NFT
-- (Access them on NFT marketplaces like OpenSea. e.g. [Song #1 on Crypto Composer](https://testnets.opensea.io/assets/0xde58a83bc2634753143c555dd08d47d22463e71f/1)
+- (Access them on NFT marketplaces like OpenSea. e.g. [Song #0 on Crypto Composer](https://opensea.io/assets/matic/0xadf78367db78437a371dd07dc6fef826b332aa23/0)
 
 ## Architecture and directory structure
 
