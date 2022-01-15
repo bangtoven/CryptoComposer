@@ -1294,4 +1294,11 @@ export const CCTokenABI = [
     type: 'function',
     payable: true,
   },
+  {
+    inputs: [],
+    name: 'withdrawAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
 ];

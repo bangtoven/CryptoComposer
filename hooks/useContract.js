@@ -7,10 +7,10 @@ import { CryptoComposerABI, CCTokenABI } from './ABI';
 export function useCryptoComposerContract() {
   return useContract(
     new Map([
-      [3, '0xA27FACD3FB95E8a159f69522151caA6DA4224EC2'],
-      [4, '0xDE58a83BC2634753143C555dD08d47D22463E71f'],
+      [3, '0xfcDD8e6455624CCb94C6641E97ED5bf7A96F9384'],
+      [4, '0x91922dc7384b62F5ae2f3e12D26597C36aD3b80E'],
       [137, ''],
-      [1337, '0x66505759Af3989D45906A79fB7A2d8160F16B5A8'],
+      [1337, '0x3A768f3F21DF4F707BEBA9D0dcac6Ee88a598020'],
     ]),
     CryptoComposerABI,
   );
@@ -19,10 +19,10 @@ export function useCryptoComposerContract() {
 export function useCCTVendorContract() {
   return useContract(
     new Map([
-      [3, '0xE92DB29c68EA1A4AFa30b6D777CCcB78d16033f1'],
-      [4, '0x9F4067FC1c0E6BcA242D548380525257Ab6c9cAB'],
+      [3, '0x6383A3C05F6F924680D51801EEF9B8d6CF309Dca'],
+      [4, '0x3791Ab57d095440721435fFC847841150C98DDB5'],
       [137, ''],
-      [1337, '0x9d184B3aeef268B227bd60D74beE97FF49f3D922'],
+      [1337, '0x175D03Da33E34465E8b51eed520b3aa08a508a1a'],
     ]),
     CCTokenABI,
   );

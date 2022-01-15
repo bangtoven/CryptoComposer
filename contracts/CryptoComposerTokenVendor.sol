@@ -37,4 +37,8 @@ contract CryptoComposerTokenVendor is CryptoComposerToken, Ownable {
 
 		return amountToBuy;
 	}
+
+	function withdrawAll() external onlyOwner {
+		payable(owner()).transfer(address(this).balance);
+	}
 }

@@ -26,8 +26,8 @@
 ### Smart contracts
 
 Bootstraped with [Truffle](https://github.com/trufflesuite/truffle),
-and deployed on [Ropsten](https://ropsten.etherscan.io/address/0xA27FACD3FB95E8a159f69522151caA6DA4224EC2)
-and [Rinkeby](https://rinkeby.etherscan.io/address/0xDE58a83BC2634753143C555dD08d47D22463E71f)([deployed_address.txt](./deployed_address.txt))
+and deployed on [Ropsten](https://ropsten.etherscan.io/address/0xfcDD8e6455624CCb94C6641E97ED5bf7A96F9384)
+and [Rinkeby](https://rinkeby.etherscan.io/address/0x91922dc7384b62F5ae2f3e12D26597C36aD3b80E)([deployed_address.txt](./deployed_address.txt))
 
 ```
 - contracts
@@ -93,6 +93,10 @@ export function useCCTVendorContract() {
 ...
       [1337, `{CryptoComposerTokenVendor_address}`],
 ...
+```
+
+```sh
+yarn build && yarn start
 ```
 
 ### Use the deployed web app
