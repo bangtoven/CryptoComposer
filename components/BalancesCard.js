@@ -29,7 +29,7 @@ const BalanceCard = () => {
 
   useEffect(async () => {
     if (!exchangeRate) {
-      const price = (await tokenContract.tokenPrice()).toNumber();
+      const price = BigNumber.from(await tokenContract.tokenPrice());
       setExchangeRate(price);
     }
   }, [tokenContract, chainId]);
@@ -66,7 +66,7 @@ const BalanceCard = () => {
     }
 
     tokenContract
-      .buyTokenToMintNFT({ value: BigNumber.from(exchangeRate).mul(count) })
+      .buyTokenToMintNFT({ value: exchangeRate.mul(count) })
       .then((response) => {
         const txHash = response.hash;
 
@@ -139,7 +139,7 @@ const BalanceCard = () => {
         🪙 CCT balance: {cTokenBalance} 🎶 Song count: {nftCount}
       </Text>
       <button onClick={buyCCT} style={{ backgroundColor: theme.darkBlue, color: 'white' }}>
-        Buy CCT (price: {exchangeRate / Math.pow(10, 18)} {chainId != 137 ? 'ETH' : 'MATIC'})
+        Buy CCT (price: {exchangeRate / BigNumber.from(10).pow(18)} {chainId != 137 ? 'ETH' : 'MATIC'})
       </button>
     </Card>
   );
