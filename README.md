@@ -1,6 +1,6 @@
 # [Crypto Composer](https://crypto-composer.bangtoven.com/) on Polygon
 
-- Mint NFTs storing music data, in a abstractive and discrete form
+- Mint NFTs storing music data
 - Ensure originality and uniqueness by checking hash
 - Play back the songs registered on blockchain
 
