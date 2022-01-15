@@ -19,11 +19,15 @@
 
 ## Architecture and directory structure
 
+### [Design patterns](./design_pattern_decisions.md)
+
+### [Security measures](./avoiding_common_attacks.md)
+
 ### Smart contracts
 
 Bootstraped with [Truffle](https://github.com/trufflesuite/truffle),
 and deployed on [Ropsten](https://ropsten.etherscan.io/address/0xA27FACD3FB95E8a159f69522151caA6DA4224EC2)
-and [Rinkeby](https://rinkeby.etherscan.io/address/0xDE58a83BC2634753143C555dD08d47D22463E71f)
+and [Rinkeby](https://rinkeby.etherscan.io/address/0xDE58a83BC2634753143C555dD08d47D22463E71f)([deployed_address.txt](./deployed_address.txt))
 
 ```
 - contracts
@@ -49,18 +53,51 @@ Referenced [Reactronica](https://github.com/unkleho/reactronica) to build DAWSte
 - public
 ```
 
-## Installing instructions
+## Instructions
 
-### Deploy smart contracts to local blockchain
+### Install and migration
 
+```sh
+# install frontend dependencies, smart contract tooling, and solidity libraries
+yarn install
+
+# deploy smart contracts to local network
+ganache-cli -p 8545 # or Ganache GUI
+truffle migrate
 ```
-$ yarn install
-$ ganache-cli -p 8545
-$ truffle migrate
+
+You need these local contract addresses of `CryptoComposerTokenVendor` and `CryptoComposer` later to update frontend.
+
+> Deploy to public network: Create and fill `.secret` and `.infura_api_key` files, then run `truffle migrate --network {NETWORK}`
+
+### Run unit tests
+
+```sh
+ganache-cli -p 8545 # or Ganache GUI
+truffle test
 ```
 
-- Run Ganache on port 8545
--
+### Run frontend locally
+
+Update contract addresses for `1337` network on `hooks/useContract.js` with addresses from the previous step.
+
+```JavaScript
+// hooks/useContract.js
+...
+export function useCryptoComposerContract() {
+...
+      [1337, `{CryptoComposer_address}`],
+...
+
+export function useCCTVendorContract() {
+...
+      [1337, `{CryptoComposerTokenVendor_address}`],
+...
+```
+
+### Use the deployed web app
+
+Set your local network id to `1337` and open https://crypto-composer.bangtoven.com/
 
 ## Ethereum account for certificatation NFT
 
