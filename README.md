@@ -4,7 +4,7 @@
 - Ensure originality and uniqueness by checking hash
 - Play back the songs registered on blockchain
 
-![](./screenshot.png)
+[![](https://img.youtube.com/vi/fevF6UuREqs/0.jpg)](http://www.youtube.com/watch?v=fevF6UuREqs)
 
 ## User workflows
 
@@ -109,3 +109,7 @@ Set your local network id to `1337` and open https://crypto-composer.bangtoven.c
 jungho.eth
 0xB8E1aCe6Aa298777552eda47B71857201D662134
 ```
+
+## License
+
+Copyright © 2022, [Jungho Bang](https://twitter.com/BangJungho). Released under the MIT License.
