@@ -107,7 +107,7 @@ const BalanceCard = () => {
         <Text uppercase t3 lineHeight="40px" className="mx-2">
           Sign in with Wallet
         </Text>
-        <Text t4>Select Ropsten, Rinkeby, or Polygon</Text>
+        <Text t4>Select Polygon (or Ropsten/Rinkeby)</Text>
         <ConnectBtn onClick={() => activate(injected)}>Sign in</ConnectBtn>
       </Card>
     );

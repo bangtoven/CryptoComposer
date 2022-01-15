@@ -1,4 +1,4 @@
-# [Crypto Composer](https://crypto-composer.bangtoven.com/)
+# [Crypto Composer](https://crypto-composer.bangtoven.com/) on Polygon
 
 - Mint NFTs storing music data, in a abstractive and discrete form
 - Ensure originality and uniqueness by checking hash
@@ -26,8 +26,11 @@
 ### Smart contracts
 
 Bootstraped with [Truffle](https://github.com/trufflesuite/truffle),
-and deployed on [Ropsten](https://ropsten.etherscan.io/address/0xfcDD8e6455624CCb94C6641E97ED5bf7A96F9384)
-and [Rinkeby](https://rinkeby.etherscan.io/address/0x91922dc7384b62F5ae2f3e12D26597C36aD3b80E)([deployed_address.txt](./deployed_address.txt))
+and deployed on
+[Polygon](https://polygonscan.com/address/0xadf78367db78437a371dd07dc6fef826b332aa23),
+[Ropsten](https://ropsten.etherscan.io/address/0xfcDD8e6455624CCb94C6641E97ED5bf7A96F9384),
+and [Rinkeby](https://rinkeby.etherscan.io/address/0x91922dc7384b62F5ae2f3e12D26597C36aD3b80E)
+([deployed_address.txt](./deployed_address.txt))
 
 ```
 - contracts

@@ -6,9 +6,22 @@ import Text from './Text';
 export default function OpenSea({ songId }) {
   const { chainId } = useWeb3React();
 
-  if (chainId == 4) {
+  function openseaUrl(songId) {
+    switch (chainId) {
+      case 4:
+        return `https://testnets.opensea.io/assets/0x91922dc7384b62f5ae2f3e12d26597c36ad3b80e/${songId}`;
+      case 137:
+        return `https://opensea.io/assets/matic/0xadf78367db78437a371dd07dc6fef826b332aa23/${songId}`;
+      default:
+        return null;
+    }
+  }
+
+  const url = openseaUrl(songId);
+
+  if (url) {
     return (
-      <Link href={`https://testnets.opensea.io/assets/0x91922dc7384b62f5ae2f3e12d26597c36ad3b80e/${songId}`}>
+      <Link href={url}>
         <a target="_blank" style={{ color: theme.lightBlue }}>
           <Text t2 block>
             See on OpenSea
