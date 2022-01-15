@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Text from './Text';
 import { useCryptoComposerContract } from '../hooks/useContract';
 import theme from '../styles/theme';
+import OpenSea from './OpenSea';
 
 const SongList = ({ songIDs, showComposer = true }) => {
   const contract = useCryptoComposerContract();
@@ -33,7 +34,8 @@ const SongList = ({ songIDs, showComposer = true }) => {
 
   return (
     <Container className="mt-5">
-      {/* <label>{songs && songs.toString()}</label> */}
+      {songs && songs.length != 0 ? <OpenSea songId={songs[0].id} /> : <></>}
+      <br />
       <ul>
         {songs &&
           songs.map((song) => (

@@ -38,7 +38,7 @@ export const AlertContextProvider = ({ children }) => {
           action: () => {
             const url = etherscanUrl(chainId, txHash);
             if (url) {
-              window.open(url);
+              window.open(url, '_blank');
             } else {
               alert('Unsupported chain');
             }
