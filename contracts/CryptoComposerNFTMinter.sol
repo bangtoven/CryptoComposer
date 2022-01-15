@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-/// @title Contract to mint music NFT
+/// @title Crypto Composer NFT Minter
 /// @author Jungho Bang
 /// @notice Allows users to mint their song
 contract CryptoComposerNFTMinter is
@@ -16,6 +16,11 @@ contract CryptoComposerNFTMinter is
 	ERC721Burnable,
 	Ownable
 {
+	/// @notice Event emitted when a new CryptoComposer NFT minted
+	/// @param by address of composer
+	/// @param title title of the song
+	/// @param id NFT id
+	/// @param hash hash of the song
 	event CCNFTMinted(
 		address indexed by,
 		string title,
@@ -36,6 +41,9 @@ contract CryptoComposerNFTMinter is
 
 	mapping(bytes32 => bool) private hashes;
 
+	/// @notice Mint a new NFT if the notes data hasn't been registered
+	/// @param title title of the song
+	/// @param notes data representing the music
 	function _mintNewSong(string memory title, bytes memory notes)
 		internal
 		returns (uint256)
@@ -63,6 +71,7 @@ contract CryptoComposerNFTMinter is
 		return tokenId;
 	}
 
+	/// @notice Revert hash back to false so that other composer can claim it
 	function burn(uint256 tokenId) public override {
 		super.burn(tokenId);
 
@@ -83,6 +92,7 @@ contract CryptoComposerNFTMinter is
 		return baseURI;
 	}
 
+	/// @notice Update base URI for tokenURI
 	function setBaseURI(string calldata _newURI) external onlyOwner {
 		baseURI = _newURI;
 	}

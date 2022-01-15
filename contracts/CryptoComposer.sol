@@ -4,7 +4,7 @@ pragma solidity ^0.8.2;
 import "./CryptoComposerTokenVendor.sol";
 import "./CryptoComposerNFTMinter.sol";
 
-/// @title Contract to mint music NFT and distribute CCT
+/// @title Contract to mint music NFT with CryptoComposerToken
 /// @author Jungho Bang
 /// @notice Allows users to mint their song, accepting CCT as payment
 contract CryptoComposer is CryptoComposerNFTMinter {
@@ -22,6 +22,9 @@ contract CryptoComposer is CryptoComposerNFTMinter {
 		_;
 	}
 
+	/// @notice Mint a new NFT if the caller sends enough CCT
+	/// @param title title of the song
+	/// @param notes data representing the music
 	function mintNewSong(string calldata title, bytes calldata notes)
 		external
 		hasEnoughComposerToken

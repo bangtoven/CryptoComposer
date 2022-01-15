@@ -5,6 +5,9 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
+/// @title Crypto Composer Token
+/// @author Jungho Bang
+/// @notice ERC20 token to pay for minting CryptoComposer NFT
 contract CryptoComposerToken is ERC20, ERC20Burnable, AccessControl {
 	bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 

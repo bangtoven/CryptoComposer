@@ -13,3 +13,11 @@ Specific compiler pragma `0.8.2` used in contracts to avoid accidental bug inclu
 ## Use Modifiers Only for Validation
 
 All modifiers in contracts only validate data with `require` statements.
+
+## SWC-105 Unprotected Ether Withdrawal
+
+Only owner is allowed to withdraw fund.
+
+## SWC-104 Unchecked Call Return Value
+
+Require `tokenVendor.transferFrom()` to success to check payment before minting NFT.
